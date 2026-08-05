@@ -13,9 +13,21 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Source Twin — Product Concept",
+  metadataBase: new URL("https://english-code-concept.sharan19.chatgpt.site"),
+  title: "Source Twin — Interactive Product Concept",
   description:
-    "A visual concept for a plain-language semantic twin of a software codebase.",
+    "Experience a plain-language semantic twin of a codebase: understand behavior, change intent, review impact, and hand work to a coding agent.",
+  openGraph: {
+    title: "Source Twin",
+    description: "Read the logic. Trace the evidence. Change the intent.",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Source Twin connects readable product logic to source code." }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Source Twin",
+    description: "Read the logic. Trace the evidence. Change the intent.",
+    images: ["/og.png"],
+  },
 };
 
 export default function RootLayout({
