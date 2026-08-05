@@ -1,6 +1,6 @@
-# English Code
+# Source Twin
 
-English Code is a version-controlled, plain-English semantic mirror of a software codebase. It connects shared product terminology, intended behavior, observed implementation, source evidence, tests, and coverage.
+Source Twin is a version-controlled, plain-language semantic mirror of a software codebase. It connects shared product terminology, intended behavior, observed implementation, source evidence, tests, and coverage.
 
 This repository currently contains the static product concept used to define the first implementation.
 

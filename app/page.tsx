@@ -10,9 +10,9 @@ export default function Home() {
   return (
     <main>
       <header className="site-header">
-        <a className="brand" href="#top" aria-label="English Code home">
-          <span className="brand-mark">EC</span>
-          <span>English Code</span>
+        <a className="brand" href="#top" aria-label="Source Twin home">
+          <span className="brand-mark">ST</span>
+          <span>Source Twin</span>
         </a>
         <div className="header-note">
           <StatusDot /> Product concept · v0.1
@@ -23,15 +23,15 @@ export default function Home() {
         <div className="eyebrow">A semantic mirror for software</div>
         <h1>Read the logic. Trace the evidence. Change the intent.</h1>
         <p>
-          English Code gives people and coding agents one shared, plain-language
+          Source Twin gives people and coding agents one shared, plain-language
           view of how a product works—and where every claim comes from.
         </p>
       </section>
 
-      <section className="product-shell" aria-label="English Code product preview">
+      <section className="product-shell" aria-label="Source Twin product preview">
         <div className="product-bar">
           <div className="window-dots" aria-hidden="true"><i /><i /><i /></div>
-          <div className="repo-path"><span>acme-mail</span> / english / logic / admin-send-email</div>
+          <div className="repo-path"><span>acme-mail</span> / source-twin / logic / admin-send-email</div>
           <div className="sync-state"><StatusDot tone="warn" /> Needs review</div>
         </div>
 
@@ -131,7 +131,7 @@ export default function Home() {
 
             <div className="panel-block freshness">
               <div className="freshness-title"><StatusDot tone="warn" /><strong>Code changed</strong></div>
-              <p>English was last verified before the latest source change.</p>
+              <p>The twin was last verified before the latest source change.</p>
               <div className="change-summary"><span>+1 behavior</span><span>2 symbols affected</span></div>
             </div>
           </aside>
@@ -149,7 +149,7 @@ export default function Home() {
         </div>
 
         <div className="artifact-example">
-          <div className="artifact-top"><span>english/logic/admin-send-email.ec.md</span><b>Plain Markdown</b></div>
+          <div className="artifact-top"><span>source-twin/logic/admin-send-email.st.md</span><b>Plain Markdown</b></div>
           <pre><code>{`# Send an email as the service
 
 An {{administrator}} enters a sender address directly.
@@ -170,10 +170,10 @@ An {{administrator}} enters a sender address directly.
           <h2>Meet people where they already work.</h2>
         </div>
 
-        <div className="system-flow" aria-label="English Code system flow">
+        <div className="system-flow" aria-label="Source Twin system flow">
           <div className="flow-card"><span>01</span><h3>Code and tests</h3><p>Indexed with stable symbols and evidence.</p></div>
           <div className="flow-arrow" aria-hidden="true">→</div>
-          <div className="flow-card flow-card--core"><span>02</span><h3>English Code</h3><p>Terms, logic, intent, links, and coverage.</p></div>
+          <div className="flow-card flow-card--core"><span>02</span><h3>Source Twin</h3><p>Terms, logic, intent, links, and coverage.</p></div>
           <div className="flow-arrow" aria-hidden="true">→</div>
           <div className="flow-card"><span>03</span><h3>Existing coding agent</h3><p>Connect through MCP and reviewable change packets.</p></div>
         </div>
@@ -186,8 +186,8 @@ An {{administrator}} enters a sender address directly.
         </div>
         <div className="guarantee-grid">
           <article><span>01</span><h3>Shared language</h3><p>Agents propose terminology. People approve it. References remain stable through refactors.</p></article>
-          <article><span>02</span><h3>Grounded claims</h3><p>Important English behavior links back to source code, tests, or explicit human intent.</p></article>
-          <article><span>03</span><h3>Reviewable sync</h3><p>Code and English can lead a change, but neither silently overwrites the other.</p></article>
+          <article><span>02</span><h3>Grounded claims</h3><p>Important plain-language behavior links back to source code, tests, or explicit human intent.</p></article>
+          <article><span>03</span><h3>Reviewable sync</h3><p>Code and its twin can lead a change, but neither silently overwrites the other.</p></article>
           <article><span>04</span><h3>Honest coverage</h3><p>Structure, behavior, evidence, tests, freshness, and review are measured separately.</p></article>
         </div>
       </section>
@@ -195,7 +195,7 @@ An {{administrator}} enters a sender address directly.
       <section className="dogfood-section">
         <div>
           <div className="eyebrow eyebrow--light">The first real test</div>
-          <h2>English Code will explain English Code.</h2>
+          <h2>Source Twin will explain Source Twin.</h2>
         </div>
         <p>
           As soon as the core model can describe another project, this repository
@@ -205,7 +205,7 @@ An {{administrator}} enters a sender address directly.
       </section>
 
       <footer>
-        <div className="brand"><span className="brand-mark">EC</span><span>English Code</span></div>
+        <div className="brand"><span className="brand-mark">ST</span><span>Source Twin</span></div>
         <p>Software logic people can read, question, and direct.</p>
       </footer>
     </main>

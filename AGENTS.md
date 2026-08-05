@@ -1,16 +1,16 @@
-# English Code
+# Source Twin
 
-Build a version-controlled, plain-English semantic mirror of a codebase. It must help people understand, review, and direct software changes without needing to read source code.
+Build a version-controlled, plain-language semantic twin of a codebase. It must help people understand, review, and direct software changes without needing to read source code.
 
 ## Product rules
 
-- Keep English artifacts readable as ordinary files; a viewer is optional.
+- Keep Source Twin artifacts readable as ordinary files; a viewer is optional.
 - Use stable `{{term-id}}` references from a human-approved shared taxonomy.
-- Link English logic to source symbols, tests, and related concepts.
+- Link plain-language logic to source symbols, tests, and related concepts.
 - Keep intended behavior separate from observed code behavior and surface conflicts.
 - Make synchronization reviewable in both directions; never silently turn ambiguous prose into code.
 - Prefer MCP or other agent-neutral integrations before building a custom terminal interface.
-- Use English Code on this repository itself as soon as the core supports it.
+- Use Source Twin on this repository itself as soon as the core supports it.
 
 ## Engineering
 

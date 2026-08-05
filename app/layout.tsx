@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "English Code — Product Concept",
+  title: "Source Twin — Product Concept",
   description:
-    "A visual concept for a plain-English semantic mirror of a software codebase.",
+    "A visual concept for a plain-language semantic twin of a software codebase.",
 };
 
 export default function RootLayout({

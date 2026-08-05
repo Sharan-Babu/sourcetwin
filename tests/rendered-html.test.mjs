@@ -23,19 +23,19 @@ async function render() {
   );
 }
 
-test("server-renders the English Code product concept", async () => {
+test("server-renders the Source Twin product concept", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>English Code — Product Concept<\/title>/i);
+  assert.match(html, /<title>Source Twin — Product Concept<\/title>/i);
   assert.match(html, /Read the logic\. Trace the evidence\. Change the intent\./);
   assert.match(html, /Intended rules/);
   assert.match(html, /Observed in the code/);
   assert.match(html, /\{\{customer-email-directory\}\}/);
   assert.match(html, /Connect through MCP and reviewable change packets\./);
-  assert.match(html, /English Code will explain English Code\./);
+  assert.match(html, /Source Twin will explain Source Twin\./);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
 });
 
@@ -52,8 +52,8 @@ test("keeps the concept static, responsive, and free of starter code", async () 
   assert.match(page, /Existing coding agent/);
   assert.match(css, /@media \(max-width: 760px\)/);
   assert.match(css, /prefers-reduced-motion: reduce/);
-  assert.match(layout, /title: "English Code — Product Concept"/);
-  assert.match(packageJson, /"name": "english-code"/);
+  assert.match(layout, /title: "Source Twin — Product Concept"/);
+  assert.match(packageJson, /"name": "source-twin"/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
 
   await assert.rejects(
