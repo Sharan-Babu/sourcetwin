@@ -198,4 +198,27 @@ describe("command result output", () => {
       "info ST001: Coverage is not configured.",
     );
   });
+
+  it("renders unsafe diagnostic characters visibly instead of controlling the terminal", () => {
+    const result: CommandResult<null> = {
+      command: "check",
+      ok: true,
+      summary: "Reviewed Git changes.",
+      details: [],
+      diagnostics: [{
+        code: "ST603",
+        severity: "warning",
+        location: { path: "src/first\n\u001b[31mforged\u061c.ts" },
+        message: "Mapped path\rchanged\u200e\u200f\u202e.",
+        suggestion: "Review\ttogether.",
+      }],
+      data: null,
+    };
+
+    const rendered = renderResult(result, { json: false });
+    expect(rendered).toContain("src/first\\n\\u001b[31mforged\\u061c.ts");
+    expect(rendered).toContain("Mapped path\\rchanged\\u200e\\u200f\\u202e.");
+    expect(rendered).toContain("Review\\ttogether.");
+    expect(rendered).not.toContain("\u001b");
+  });
 });

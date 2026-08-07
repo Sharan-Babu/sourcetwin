@@ -65,6 +65,13 @@ export async function parseMarkdownFile(
   repositoryPath: string,
 ): Promise<{ readonly document: ParsedMarkdown; readonly diagnostics: readonly Diagnostic[] }> {
   const source = await readFile(absolutePath, "utf8");
+  return parseMarkdown(source, repositoryPath);
+}
+
+export function parseMarkdown(
+  source: string,
+  repositoryPath: string,
+): { readonly document: ParsedMarkdown; readonly diagnostics: readonly Diagnostic[] } {
   const tree = unified().use(remarkParse).use(remarkFrontmatter, ["yaml"]).parse(source) as Root;
   const first = tree.children[0] as Root["children"][number] | undefined;
   const yamlNode = first?.type === "yaml" ? (first as unknown as YamlNode) : undefined;

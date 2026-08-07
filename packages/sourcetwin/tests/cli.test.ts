@@ -47,6 +47,7 @@ describe("CLI foundation", () => {
     const topic = await runCli("help", "logic");
 
     expect(command.stdout).toContain("Usage: sourcetwin check");
+    expect(command.stdout).toContain("--base <git-ref>");
     expect(command.stdout).toContain("--root <path>");
     expect(command.stdout).toContain("--json");
     expect(topic.stdout).toContain("# Logic files");
@@ -63,15 +64,42 @@ describe("CLI foundation", () => {
   it("runs from an explicit root with text and JSON parity", async () => {
     repository = await createTestRepository();
     const initialized = await runCli("--root", repository.root, "init");
-    const checked = await runCli("check", "--root", repository.root, "--json");
+    await repository.commitAll("initialized");
+    const checked = await runCli("check", "--root", repository.root, "--base", "HEAD", "--json");
+    const checkedText = await runCli("check", "--root", repository.root, "--base", "HEAD");
     const parsed = JSON.parse(checked.stdout) as {
       readonly ok: boolean;
       readonly details: readonly string[];
-      readonly data: { readonly logicFiles: number };
+      readonly data: {
+        readonly logicFiles: number;
+        readonly gitReview: { readonly base: string; readonly changes: readonly unknown[] };
+      };
     };
 
     expect(initialized.stdout).toContain("Created source-twin/SKILL.md");
-    expect(parsed).toMatchObject({ ok: true, data: { logicFiles: 0 } });
+    expect(parsed).toMatchObject({
+      ok: true,
+      data: { logicFiles: 0, gitReview: { base: "HEAD", changes: [] } },
+    });
     expect(parsed.details).toContain("Logic files: 0");
+    expect(checkedText.stdout).toContain("Git base: HEAD");
+  });
+
+  it("rejects an explicitly empty Git base", async () => {
+    repository = await createTestRepository();
+    await runCli("--root", repository.root, "init");
+    await repository.commitAll("initialized");
+
+    await expect(runCli(
+      "check",
+      "--root",
+      repository.root,
+      "--base",
+      "",
+      "--json",
+    )).rejects.toMatchObject({
+      code: 1,
+      stderr: expect.stringContaining("ST601"),
+    });
   });
 });

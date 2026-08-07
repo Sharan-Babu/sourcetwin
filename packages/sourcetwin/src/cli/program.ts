@@ -82,9 +82,16 @@ export function createProgram(runtime: CliRuntime = DEFAULT_RUNTIME): Command {
 
   const check = program
     .command("check")
-    .description("validate Source Twin configuration and authored files");
+    .description("validate Source Twin configuration and authored files")
+    .option("--base <git-ref>", "also review changes against a branch, tag, or commit");
   check.action(async () => {
-    await executeCommand("check", options(check), runtime, runCheck);
+    const { base } = check.opts<{ base?: string }>();
+    await executeCommand(
+      "check",
+      options(check),
+      runtime,
+      (repositoryRoot) => runCheck(repositoryRoot, base !== undefined ? { base } : {}),
+    );
   });
 
   const coverage = program
