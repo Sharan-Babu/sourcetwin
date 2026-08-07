@@ -1,0 +1,14 @@
+schema: 1
+coverage:
+  code:
+    include:
+      - packages/sourcetwin/src/**/*.ts
+    exclude:
+      - packages/sourcetwin/src/cli.ts
+    entities: []
+  tests:
+    include:
+      - packages/sourcetwin/tests/**/*.ts
+    exclude:
+      - packages/sourcetwin/tests/helpers/**
+    entities: []

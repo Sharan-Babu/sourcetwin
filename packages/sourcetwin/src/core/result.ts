@@ -55,6 +55,7 @@ export interface CommandResult<T = JsonValue> {
   readonly command: string;
   readonly ok: boolean;
   readonly summary: string;
+  readonly details: readonly string[];
   readonly diagnostics: readonly Diagnostic[];
   readonly data: JsonCompatible<T>;
 }

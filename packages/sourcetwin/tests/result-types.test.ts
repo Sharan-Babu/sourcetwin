@@ -11,6 +11,7 @@ test("ordinary interfaces are valid structured payloads", () => {
     command: "check",
     ok: true,
     summary: "Done.",
+    details: [],
     diagnostics: [],
     data: { count: 2, names: ["one", "two"] },
   };

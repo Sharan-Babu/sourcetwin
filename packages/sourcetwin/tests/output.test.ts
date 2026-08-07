@@ -11,6 +11,7 @@ const success: CommandResult<CheckData> = {
   command: "check",
   ok: true,
   summary: "Checked 3 files.",
+  details: [],
   diagnostics: [],
   data: { checked: 3 },
 };
@@ -144,6 +145,7 @@ describe("command result output", () => {
       command: "check",
       ok: false,
       summary: "Source Twin has 2 errors.",
+      details: [],
       diagnostics: [
         {
           code: "ST101",
@@ -181,6 +183,7 @@ describe("command result output", () => {
       command: "check",
       ok: true,
       summary: "Checked configuration.",
+      details: [],
       diagnostics: [
         {
           code: "ST001",

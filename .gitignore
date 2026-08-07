@@ -12,6 +12,8 @@
 
 # testing
 **/coverage/
+!packages/sourcetwin/src/coverage/
+!packages/sourcetwin/src/coverage/**
 
 # next.js
 /.next/

@@ -23,7 +23,7 @@ function formatDiagnostic(diagnostic: Diagnostic): readonly string[] {
 }
 
 export function renderText<T>(result: CommandResult<T>): string {
-  const lines = [result.summary];
+  const lines = [result.summary, ...result.details];
 
   for (const diagnostic of result.diagnostics) {
     lines.push(...formatDiagnostic(diagnostic));
