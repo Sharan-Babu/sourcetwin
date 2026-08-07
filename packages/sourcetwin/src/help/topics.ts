@@ -39,17 +39,17 @@ metadata:
 const TOPICS = {
   config: `# Configuration
 
-Store repository schema and measured scope in source-twin/config.yml. Paths and glob patterns are repository-relative. Empty include lists mean that scope is not configured; empty entities lists explicitly request path-only coverage.
+Store repository schema and measured scope in source-twin/config.yml. Paths and glob patterns are repository-relative. Empty include lists mean that scope is not configured; empty entities lists explicitly request path-only coverage. The built-in function kind includes functions and qualified methods for JavaScript, TypeScript, Python, Go, Rust, and Java. The built-in test kind supports common JavaScript and TypeScript test/it calls, pytest-style Python tests, and Go tests. Unsupported languages and kinds keep path-level validation and are reported by coverage.
 
 \`\`\`yaml
 ${DEFAULT_CONFIG.trimEnd()}
 \`\`\`
 
-Only schema 1 fields are accepted. Optional inventory.rules lists Source Twin ast-grep rule files. inventory.astGrepConfig is reserved for an explicit advanced ast-grep configuration.
+Only schema 1 fields are accepted. Optional inventory.rules lists Source Twin ast-grep rule files. Set inventory.astGrepConfig only when an advanced language needs an explicit, repository-owned ast-grep configuration.
 `,
   logic: `# Logic files
 
-Place canonical Markdown anywhere under source-twin/ except terms/, drafts/, README.md, and SKILL.md. Each file needs a unique dot-separated lowercase id, one H1, a non-empty body, and at least one source.code entry. Source entries use path, path#readable-locator, or directory/**.
+Place canonical Markdown anywhere under source-twin/ except terms/, drafts/, README.md, and SKILL.md. Each file needs a unique dot-separated lowercase id, one H1, a non-empty body, and at least one source.code entry. Source entries use path, path#readable-locator, or directory/**. When structural entities are enabled for that scope, exact locators must match an inventoried entity; coverage lists the available locators.
 
 \`\`\`markdown
 ${LOGIC_EXAMPLE.trimEnd()}
@@ -65,7 +65,7 @@ ${TERM_EXAMPLE.trimEnd()}
 `,
   rules: `# Inventory rules
 
-Project rules extend structural coverage with readable entities such as routes or jobs. Put one ast-grep rule in each YAML file under source-twin/rules/ and list it in config.yml. Its unique id and metadata.sourceTwinKind use lowercase hyphenated values. metadata.sourceTwinLocator is a readable template built from captures in that rule.
+Project rules extend structural coverage with readable entities such as routes or jobs. Put one native ast-grep rule in each YAML file under source-twin/rules/ and list it in config.yml. Its unique id and metadata.sourceTwinKind use lowercase hyphenated values. metadata.sourceTwinLocator is a readable template built from captures in that rule. Source Twin validates native rules with ast-grep and rejects missing captures or ambiguous emitted locators.
 
 \`\`\`yaml
 ${RULE_EXAMPLE.trimEnd()}

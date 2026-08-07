@@ -9,10 +9,10 @@ let repository: TestRepository;
 beforeEach(async () => {
   repository = await createTestRepository();
   await Promise.all([
-    repository.write("src/direct.ts", "direct\n"),
-    repository.write("src/file.ts", "file\n"),
-    repository.write("src/module/inside.ts", "module\n"),
-    repository.write("src/unmapped.ts", "unmapped\n"),
+    repository.write("src/direct.ts", "export function direct() {}\n"),
+    repository.write("src/file.ts", "export function file() {}\n"),
+    repository.write("src/module/inside.ts", "export function inside() {}\n"),
+    repository.write("src/unmapped.ts", "export function unmapped() {}\n"),
     repository.write("src/excluded.ts", "excluded\n"),
   ]);
 });
@@ -35,7 +35,7 @@ describe("path coverage", () => {
     const config: CoverageScopeConfig = {
       include: ["src/**/*.ts", "src/direct.ts"],
       exclude: ["src/excluded.ts"],
-      entities: ["function"],
+      entities: ["unknown-kind"],
     };
     const mappings = [
       mapping({ kind: "direct", path: "src/direct.ts", locator: "run" }),
@@ -56,7 +56,7 @@ describe("path coverage", () => {
       unmapped: 1,
       broken: 3,
       unsupported: 4,
-      unsupportedKinds: ["function"],
+      unsupportedKinds: ["unknown-kind"],
       unmappedPaths: ["src/unmapped.ts"],
       brokenReferences: [
         "src/missing-direct.ts#run",
@@ -89,5 +89,46 @@ describe("path coverage", () => {
     );
 
     expect(result).toMatchObject({ direct: 1, fileLevel: 0, moduleLevel: 0 });
+  });
+
+  it("classifies extracted entities by exact, file, module, and unmapped coverage", async () => {
+    const result = await analyzeScope(
+      repository.root,
+      { include: ["src/**/*.ts"], exclude: ["src/excluded.ts"], entities: ["function"] },
+      [
+        mapping({ kind: "direct", path: "src/direct.ts", locator: "direct" }),
+        mapping({ kind: "file", path: "src/file.ts" }),
+        mapping({ kind: "module", path: "src/module" }),
+      ],
+    );
+
+    expect(result.entities).toMatchObject({
+      configured: true,
+      total: 4,
+      direct: 1,
+      fileLevel: 1,
+      moduleLevel: 1,
+      unmapped: 1,
+      unsupported: 0,
+    });
+    expect(result.entities.unmappedItems).toEqual([
+      expect.objectContaining({ path: "src/unmapped.ts", kind: "function", locator: "unmapped" }),
+    ]);
+  });
+
+  it("reports stale exact locators as broken instead of direct coverage", async () => {
+    const result = await analyzeScope(
+      repository.root,
+      { include: ["src/direct.ts"], exclude: [], entities: ["function"] },
+      [mapping({ kind: "direct", path: "src/direct.ts", locator: "gone" })],
+    );
+
+    expect(result).toMatchObject({
+      direct: 0,
+      unmapped: 1,
+      broken: 1,
+      brokenReferences: ["src/direct.ts#gone"],
+      entities: { direct: 0, unmapped: 1 },
+    });
   });
 });

@@ -1,6 +1,8 @@
 import type { CommandResult, Diagnostic } from "../core/result.js";
 import { loadConfig } from "../config/load.js";
 import { validateConfigReferences } from "../config/references.js";
+import { loadInventoryRules } from "../inventory/rules.js";
+import { validateInventory } from "../inventory/validate.js";
 import { validateProject } from "../validation/project.js";
 
 interface CheckData {
@@ -33,24 +35,26 @@ export async function runCheck(repositoryRoot: string): Promise<CommandResult<Ch
     return result(loaded.diagnostics, { logicFiles: 0, termFiles: 0, draftFiles: 0, mappings: 0 });
   }
 
-  const [configDiagnostics, project] = await Promise.all([
+  const [configDiagnostics, inventoryRules, project] = await Promise.all([
     validateConfigReferences(repositoryRoot, loaded.config),
+    loadInventoryRules(repositoryRoot, loaded.config),
     validateProject(repositoryRoot),
   ]);
-  const unsupportedKinds = [...new Set([
-    ...loaded.config.coverage.code.entities,
-    ...loaded.config.coverage.tests.entities,
-  ])];
-  const unsupportedDiagnostics: Diagnostic[] = unsupportedKinds.map((kind) => ({
-    code: "ST106",
-    severity: "error",
-    message: `No structural inventory provider is available for enabled entity kind: ${kind}`,
-    location: { path: "source-twin/config.yml" },
-    suggestion: "Use path-only coverage or configure a supported inventory rule.",
-    help: "sourcetwin help config",
-  }));
+  const locatorDiagnostics = inventoryRules.diagnostics.some(({ severity }) => severity === "error")
+    ? []
+    : await validateInventory(
+        repositoryRoot,
+        loaded.config,
+        project.mappings,
+        inventoryRules.rules,
+      );
   return result(
-    [...configDiagnostics, ...unsupportedDiagnostics, ...project.diagnostics],
+    [
+      ...configDiagnostics,
+      ...inventoryRules.diagnostics,
+      ...project.diagnostics,
+      ...locatorDiagnostics,
+    ],
     {
       logicFiles: project.logicFiles,
       termFiles: project.termFiles,

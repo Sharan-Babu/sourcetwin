@@ -1,5 +1,5 @@
 import { execFile } from "node:child_process";
-import { cp, mkdtemp, mkdir, readFile, rm } from "node:fs/promises";
+import { cp, mkdtemp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { delimiter, dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -32,7 +32,7 @@ beforeAll(async () => {
   });
   await execFileAsync(
     "npm",
-    ["install", "--ignore-scripts", join(temporaryRoot, "sourcetwin-0.1.0.tgz")],
+    ["install", join(temporaryRoot, "sourcetwin-0.1.0.tgz")],
     { cwd: consumerRoot },
   );
 });
@@ -69,5 +69,29 @@ describe("published package", () => {
     ) as { readonly bin?: { readonly sourcetwin?: string } };
 
     expect(manifest.bin?.sourcetwin).toBe("dist/cli.js");
+  });
+
+  it("ships a working structural inventory dependency", async () => {
+    const executable = join(consumerRoot, "node_modules", ".bin", "sourcetwin");
+    await execFileAsync("git", ["init", "--quiet"], { cwd: consumerRoot });
+    await execFileAsync(executable, ["init"], { cwd: consumerRoot });
+    await mkdir(join(consumerRoot, "src"));
+    await writeFile(join(consumerRoot, "src", "service.ts"), "export function start() {}\n");
+    await writeFile(
+      join(consumerRoot, "source-twin", "config.yml"),
+      `schema: 1
+coverage:
+  code: { include: [src/**/*.ts], exclude: [], entities: [function] }
+  tests: { include: [], exclude: [], entities: [] }
+`,
+    );
+    await writeFile(
+      join(consumerRoot, "source-twin", "service.md"),
+      "---\nid: service\nsource:\n  code: [src/service.ts#start]\n---\n# Service\n\nStarts.\n",
+    );
+
+    const checked = await execFileAsync(executable, ["check", "--json"], { cwd: consumerRoot });
+    const result = JSON.parse(checked.stdout) as { readonly ok: boolean };
+    expect(result.ok).toBe(true);
   });
 });

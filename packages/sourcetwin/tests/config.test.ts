@@ -93,15 +93,26 @@ describe("configuration", () => {
   it("validates configured inventory file paths", async () => {
     await repository.write(
       "source-twin/config.yml",
-      `${DEFAULT_CONFIG}inventory:\n  rules: [source-twin/rules/routes.yml]\n  astGrepConfig: source-twin/ast-grep.yml\n`,
+      `${DEFAULT_CONFIG}inventory:\n  rules: [source-twin/rules/routes.yml]\n`,
     );
     const loaded = await loadConfig(repository.root);
     expect(loaded.config).toBeDefined();
 
     const missing = await validateConfigReferences(repository.root, loaded.config!);
-    expect(missing).toHaveLength(2);
+    expect(missing).toHaveLength(1);
     await repository.write("source-twin/rules/routes.yml", "rule: {}\n");
-    await repository.write("source-twin/ast-grep.yml", "ruleDirs: []\n");
     await expect(validateConfigReferences(repository.root, loaded.config!)).resolves.toEqual([]);
+  });
+
+  it("accepts an explicit advanced ast-grep configuration inside the repository", async () => {
+    await repository.write(
+      "source-twin/config.yml",
+      `${DEFAULT_CONFIG}inventory:\n  astGrepConfig: source-twin/ast-grep.yml\n`,
+    );
+    await repository.write("source-twin/ast-grep.yml", "ruleDirs: []\n");
+    const loaded = await loadConfig(repository.root);
+
+    const diagnostics = await validateConfigReferences(repository.root, loaded.config!);
+    expect(diagnostics).toEqual([]);
   });
 });

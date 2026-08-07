@@ -5,10 +5,12 @@ coverage:
       - packages/sourcetwin/src/**/*.ts
     exclude:
       - packages/sourcetwin/src/cli.ts
-    entities: []
+    entities:
+      - function
   tests:
     include:
       - packages/sourcetwin/tests/**/*.ts
     exclude:
       - packages/sourcetwin/tests/helpers/**
-    entities: []
+    entities:
+      - test

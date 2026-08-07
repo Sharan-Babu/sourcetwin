@@ -30,32 +30,25 @@ describe("commands", () => {
     await repository.write("source-twin/README.md", "# Custom\n");
     const repeated = await runInit(repository.root);
     expect(repeated).toMatchObject({ ok: false, diagnostics: [{ code: "ST401" }] });
-    await expect(readFile(join(repository.root, "source-twin/README.md"), "utf8")).resolves.toBe(
-      "# Custom\n",
-    );
+    await expect(readFile(join(repository.root, "source-twin/README.md"), "utf8"))
+      .resolves.toBe("# Custom\n");
   });
 
   it("checks a fresh path-only Source Twin", async () => {
     await runInit(repository.root);
-
     const result = await runCheck(repository.root);
     expect(result).toMatchObject({ ok: true, data: { logicFiles: 0, mappings: 0 } });
   });
 
   it("fails check for invalid configuration", async () => {
     const result = await runCheck(repository.root);
-
     expect(result.ok).toBe(false);
     expect(result.diagnostics[0]?.code).toBe("ST101");
   });
 
   it("reports plural check errors", async () => {
     await runInit(repository.root);
-    await repository.write(
-      "source-twin/broken.md",
-      "---\nid: Bad\n---\n# One\n# Two\n",
-    );
-
+    await repository.write("source-twin/broken.md", "---\nid: Bad\n---\n# One\n# Two\n");
     const result = await runCheck(repository.root);
     expect(result.summary).toMatch(/has \d+ errors/);
   });
@@ -64,20 +57,6 @@ describe("commands", () => {
     await expect(runInit(join(repository.root, "missing-parent"))).rejects.toMatchObject({
       code: "ENOENT",
     });
-  });
-
-  it("fails check when an entity kind has no inventory provider", async () => {
-    await runInit(repository.root);
-    const configPath = join(repository.root, "source-twin/config.yml");
-    const config = await readFile(configPath, "utf8");
-    await repository.write(
-      "source-twin/config.yml",
-      config.replace("entities: []", "entities: [function]"),
-    );
-
-    const result = await runCheck(repository.root);
-    expect(result.ok).toBe(false);
-    expect(result.diagnostics[0]?.code).toBe("ST106");
   });
 
   it("reports path coverage without failing for gaps or authored errors", async () => {
