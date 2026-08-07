@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { loadConfig } from "../src/config/load.js";
+import { RULE_EXAMPLE } from "../src/help/topics.js";
 import { loadInventoryRules } from "../src/inventory/rules.js";
 import { scanInventory } from "../src/inventory/scan.js";
 import { createTestRepository, type TestRepository } from "./helpers/repository.js";
@@ -23,14 +24,7 @@ inventory:
 
 describe("custom inventory rule loading", () => {
   it("extracts a readable entity locator from an ast-grep capture", async () => {
-    await repository.write("source-twin/rules/routes.yml", `id: http-post-route
-language: TypeScript
-rule:
-  pattern: router.post($PATH, $$$HANDLERS)
-metadata:
-  sourceTwinKind: http-route
-  sourceTwinLocator: POST $PATH
-`);
+    await repository.write("source-twin/rules/routes.yml", RULE_EXAMPLE);
     await repository.write("src/routes.ts", 'router.post("/users", handler);\n');
     const loaded = await configuredRules(["source-twin/rules/routes.yml"]);
     expect(loaded.diagnostics).toEqual([]);

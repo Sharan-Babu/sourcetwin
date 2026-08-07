@@ -12,6 +12,7 @@ source:
     - packages/sourcetwin/tests/markdown.test.ts
     - packages/sourcetwin/tests/mappings.test.ts
     - packages/sourcetwin/tests/coverage.test.ts
+    - packages/sourcetwin/tests/help-examples.test.ts
     - packages/sourcetwin/tests/inventory.test.ts
     - packages/sourcetwin/tests/rules.test.ts
 ---

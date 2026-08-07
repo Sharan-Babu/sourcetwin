@@ -1,14 +1,18 @@
 # Source Twin
 
-Source Twin is a version-controlled, plain-language semantic mirror of a software codebase. It connects shared product terminology, intended behavior, observed implementation, source evidence, tests, and coverage.
+Source Twin is a version-controlled, plain-language semantic mirror of a software codebase. It helps people and coding agents understand, change, and review software through ordinary Markdown connected to code and tests.
 
-This repository contains the private product prototype and the Source Twin CLI workspace.
+This repository contains the publishable `sourcetwin` CLI workspace and a local interactive product prototype.
 
-## Run locally
+## CLI
+
+The package lives in `packages/sourcetwin/`. Its README contains installation, command, agent-integration, and supported-language guidance.
+
+## Develop
 
 ```bash
 npm install
 npm run dev
 ```
 
-Use `npm test` to build the page and verify its essential content.
+Use `npm run quality` to lint, type-check, build, and test the website and CLI package.
