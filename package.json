@@ -1,7 +1,10 @@
 {
-  "name": "source-twin",
+  "name": "source-twin-website",
   "version": "0.1.0",
   "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "engines": {
     "node": ">=22.13.0"
   },
@@ -9,8 +12,11 @@
     "dev": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext dev",
     "build": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext build",
     "start": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext start",
-    "test": "npm run build && node --test tests/rendered-html.test.mjs",
-    "lint": "eslint . --ignore-pattern dist --ignore-pattern .next"
+    "test": "npm run test:website && npm run test --workspace sourcetwin",
+    "test:website": "npm run build && node --test tests/rendered-html.test.mjs",
+    "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --max-warnings 0",
+    "typecheck": "tsc --noEmit && npm run typecheck --workspace sourcetwin",
+    "quality": "npm run lint && npm run typecheck && npm test"
   },
   "dependencies": {
     "next": "^16.3.0",
@@ -34,5 +40,14 @@
     "vite": "8.0.13",
     "wrangler": "4.92.0"
   },
-  "type": "module"
+  "type": "module",
+  "description": "Source Twin is a version-controlled, plain-language semantic mirror of a software codebase. It connects shared product terminology, intended behavior, observed implementation, source evidence, tests, and coverage.",
+  "main": "index.js",
+  "directories": {
+    "example": "examples",
+    "test": "tests"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

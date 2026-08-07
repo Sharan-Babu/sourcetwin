@@ -49,7 +49,7 @@ test("keeps the prototype interactive, responsive, and accessible", async () => 
   assert.match(css, /focus-visible/);
   assert.match(css, /prefers-reduced-motion: reduce/);
   assert.match(layout, /title: "Source Twin — Interactive Product Concept"/);
-  assert.match(packageJson, /"name": "source-twin"/);
+  assert.match(packageJson, /"name": "source-twin-website"/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
 
   await assert.rejects(access(new URL("../app/_sites-preview", import.meta.url)));
