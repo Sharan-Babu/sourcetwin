@@ -1,11 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { evidenceViews, walkthroughStages, type EvidenceView } from "../walkthrough-data";
-import { navigateTabs } from "./tab-navigation";
-
-const evidenceIds = evidenceViews.map(({ id }) => id);
-const evidenceTabId = (id: string) => `evidence-tab-${id}`;
+import { evidenceViews, walkthroughStages } from "../walkthrough-data";
 
 function LinePrefix({ tone }: { tone: "plain" | "add" | "remove" | "muted" }) {
   if (tone === "add") return <span>+</span>;
@@ -15,9 +11,7 @@ function LinePrefix({ tone }: { tone: "plain" | "add" | "remove" | "muted" }) {
 
 export function EvolutionDemo() {
   const [stageIndex, setStageIndex] = useState(0);
-  const [view, setView] = useState<EvidenceView>("twin");
   const stage = walkthroughStages[stageIndex];
-  const panel = stage.panels[view];
 
   const move = (amount: number) => {
     setStageIndex((current) => Math.min(walkthroughStages.length - 1, Math.max(0, current + amount)));
@@ -32,7 +26,7 @@ export function EvolutionDemo() {
         </div>
         <p>
           This subscription scenario comes from a real multi-turn test with a coding agent. Choose
-          a stage, then inspect the readable twin, implementation, tests, or terminal result.
+          a stage, then compare the readable twin, implementation, tests, and terminal result together.
         </p>
       </div>
 
@@ -77,47 +71,35 @@ export function EvolutionDemo() {
           </aside>
 
           <div className="evolution-workspace">
-            <div className="evidence-tabs" role="tablist" aria-label="Project evidence views">
-              {evidenceViews.map((item, index) => (
-                <button
-                  aria-controls="evolution-evidence-panel"
-                  aria-selected={view === item.id}
-                  className={view === item.id ? "evidence-tab evidence-tab--active" : "evidence-tab"}
-                  id={evidenceTabId(item.id)}
-                  key={item.id}
-                  onClick={() => setView(item.id)}
-                  onKeyDown={(event) => navigateTabs({
-                    currentIndex: index,
-                    event,
-                    ids: evidenceIds,
-                    onSelect: (id) => setView(id as EvidenceView),
-                    tabId: evidenceTabId,
-                  })}
-                  role="tab"
-                  tabIndex={view === item.id ? 0 : -1}
-                  type="button"
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
+            <section className="evidence-board" aria-label="Project evidence">
+              {evidenceViews.map((item) => {
+                const panel = stage.panels[item.id];
 
-            <div
-              aria-labelledby={evidenceTabId(view)}
-              className={`evolution-evidence evolution-evidence--${view}`}
-              id="evolution-evidence-panel"
-              role="tabpanel"
-            >
-              <div className="evidence-top"><span>{panel.filename}</span><small>{panel.label}</small></div>
-              <div className="evidence-lines">
-                {panel.lines.map((line, index) => (
-                  <div className={`evidence-line evidence-line--${line.tone}`} key={`${line.text}-${index}`}>
-                    <LinePrefix tone={line.tone} />
-                    <code>{line.text || " "}</code>
-                  </div>
-                ))}
-              </div>
-            </div>
+                return (
+                  <article
+                    aria-labelledby={`evidence-title-${item.id}`}
+                    className={`evolution-evidence evolution-evidence--${item.id}`}
+                    key={item.id}
+                  >
+                    <div className="evidence-top">
+                      <div>
+                        <h4 id={`evidence-title-${item.id}`}>{item.label}</h4>
+                        <strong>{panel.filename}</strong>
+                      </div>
+                      <small>{panel.label}</small>
+                    </div>
+                    <div className="evidence-lines">
+                      {panel.lines.map((line, index) => (
+                        <div className={`evidence-line evidence-line--${line.tone}`} key={`${line.text}-${index}`}>
+                          <LinePrefix tone={line.tone} />
+                          <code>{line.text || " "}</code>
+                        </div>
+                      ))}
+                    </div>
+                  </article>
+                );
+              })}
+            </section>
           </div>
         </div>
       </div>

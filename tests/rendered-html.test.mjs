@@ -33,6 +33,12 @@ test("server-renders the focused Source Twin launch website", async () => {
   assert.match(html, /A real multi-turn example/);
   assert.match(html, /Before Source Twin/);
   assert.match(html, /Twin file/);
+  assert.match(html, /src\/subscriptions\.js/);
+  assert.match(html, /tests\/subscriptions\.test\.js/);
+  assert.match(html, /repository terminal/);
+  for (const view of ["twin", "code", "tests", "terminal"]) {
+    assert.match(html, new RegExp(`aria-labelledby="evidence-title-${view}"`));
+  }
   assert.match(html, /Three commands support the whole workflow\./);
   assert.match(html, /The files are the product/);
   assert.match(html, /illustrative example/);
@@ -48,7 +54,7 @@ test("server-renders the focused Source Twin launch website", async () => {
 test("keeps the launch experience interactive, accessible, responsive, and modular", async () => {
   const [
     page, evolution, walkthrough, fileExplorer, launch, responsiveCss,
-    tabNavigation, layout, siteUrl, robots, sitemap, packageJson,
+    evolutionCss, layout, siteUrl, robots, sitemap, packageJson,
   ] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/components/evolution-demo.tsx", import.meta.url), "utf8"),
@@ -56,7 +62,7 @@ test("keeps the launch experience interactive, accessible, responsive, and modul
     readFile(new URL("../app/components/file-explorer.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/components/launch-overview.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/styles/responsive.css", import.meta.url), "utf8"),
-    readFile(new URL("../app/components/tab-navigation.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/styles/evolution.css", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/site-url.ts", import.meta.url), "utf8"),
     readFile(new URL("../app/robots.ts", import.meta.url), "utf8"),
@@ -67,10 +73,10 @@ test("keeps the launch experience interactive, accessible, responsive, and modul
   assert.match(evolution, /["']use client["']/);
   assert.match(evolution, /useState/);
   assert.match(evolution, /Project evolution stages/);
-  assert.match(evolution, /Project evidence views/);
-  assert.match(evolution, /aria-controls="evolution-evidence-panel"/);
-  assert.match(evolution, /aria-labelledby=/);
-  assert.match(evolution, /tabIndex=/);
+  assert.match(evolution, /Project evidence/);
+  assert.match(evolution, /evidenceViews\.map/);
+  assert.match(evolution, /aria-labelledby=\{`evidence-title-/);
+  assert.doesNotMatch(evolution, /role="tab"|role="tabpanel"|aria-selected/);
   assert.match(walkthrough, /conversation:/);
   assert.match(walkthrough, /One more requirement/);
   assert.match(fileExplorer, /useState/);
@@ -80,12 +86,10 @@ test("keeps the launch experience interactive, accessible, responsive, and modul
   assert.match(launch, /scope="col"/);
   assert.match(launch, /scope="row"/);
   assert.match(launch, /Source Twin installation commands/);
-  assert.match(tabNavigation, /ArrowLeft/);
-  assert.match(tabNavigation, /ArrowRight/);
-  assert.match(tabNavigation, /Home/);
-  assert.match(tabNavigation, /End/);
-  assert.match(tabNavigation, /\.focus\(\)/);
+  assert.match(evolutionCss, /\.evidence-board \{[^}]*grid-template-columns: repeat\(2/);
+  assert.match(evolutionCss, /justify-content: flex-start/);
   assert.match(responsiveCss, /@media \(max-width: 760px\)/);
+  assert.match(responsiveCss, /\.evidence-board \{ grid-template-columns: 1fr; \}/);
   assert.match(responsiveCss, /prefers-reduced-motion: reduce/);
   assert.match(layout, /title: "Source Twin \| Understand Software in Plain English"/);
   assert.match(layout, /alternates: \{ canonical: "\/" \}/);
