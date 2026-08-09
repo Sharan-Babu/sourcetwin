@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { EvolutionDemo } from "./components/evolution-demo";
 import { LaunchOverview } from "./components/launch-overview";
 import { ProductOverview } from "./components/product-overview";
@@ -10,7 +11,7 @@ export default function Home() {
     <main id="top">
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Source Twin home">
-          <span className="brand-mark">ST</span>
+          <Image alt="" className="brand-mark" height={32} priority src="/source-twin-mark.png" width={32} />
           <span>Source Twin</span>
         </a>
         <nav className="site-nav" aria-label="Page sections">
@@ -70,7 +71,10 @@ export default function Home() {
       <LaunchOverview />
 
       <footer>
-        <div className="brand"><span className="brand-mark">ST</span><span>Source Twin</span></div>
+        <div className="brand">
+          <Image alt="" className="brand-mark" height={32} src="/source-twin-mark.png" width={32} />
+          <span>Source Twin</span>
+        </div>
         <p>A readable mirror for software and the people who shape it.</p>
         <div className="footer-links"><a href="#files">Files</a><a href="#start">Install</a><a href="#top">Back to top</a></div>
       </footer>

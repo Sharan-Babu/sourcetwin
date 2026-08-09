@@ -1,34 +1,39 @@
 import { FileExplorer } from "./file-explorer";
 
 const commands = [
-  ["init", "Create only config, writing guidance, and the portable skill. Never overwrite an existing twin."],
-  ["check", "Validate authored files, terms, links, mappings, exact locators, and optional Git review."],
-  ["coverage", "Measure code and tests independently and expose direct, broad, missing, or unsupported areas."],
+  { name: "init", moment: "Start once", description: "Create the small foundation. Your agent proposes the first useful area." },
+  { name: "check", moment: "After edits", description: "Catch broken files, terms, links, mappings, and exact source locators." },
+  { name: "coverage", moment: "When reviewing", description: "See which code and tests are connected, broad, missing, or unsupported." },
 ] as const;
 
 export function ProductOverview() {
   return (
     <>
       <section className="section command-section" id="commands">
-        <div className="section-heading">
-          <span className="kicker">A small tool by design</span>
-          <h2>Three commands support the whole workflow.</h2>
-          <p>Your coding agent, Git, and normal search tools handle the rest.</p>
+        <div className="section-heading section-heading--split command-heading">
+          <div>
+            <span className="kicker">A small tool by design</span>
+            <h2>Three commands. One clear loop.</h2>
+          </div>
+          <p>Source Twin handles setup, validation, and coverage. Your coding agent and Git handle the work around them.</p>
         </div>
 
-        <div className="command-grid">
-          {commands.map(([name, description], index) => (
-            <article key={name}>
-              <div><span>0{index + 1}</span><code>sourcetwin {name}</code></div>
-              <p>{description}</p>
-            </article>
-          ))}
-        </div>
+        <div className="command-panel">
+          <div className="command-grid">
+            {commands.map(({ name, moment, description }, index) => (
+              <article key={name}>
+                <div className="command-order"><span>0{index + 1}</span><small>{moment}</small></div>
+                <code><span>$</span> sourcetwin {name}</code>
+                <p>{description}</p>
+              </article>
+            ))}
+          </div>
 
-        <div className="help-strip">
-          <span>Version-matched offline reference</span>
-          <code>sourcetwin help config | logic | terms | rules</code>
-          <p>Help explains the format; check proves the files obey it.</p>
+          <div className="help-strip">
+            <span>Need the format?</span>
+            <code>sourcetwin help config | logic | terms | rules</code>
+            <p>Offline, version-matched, and available to your agent.</p>
+          </div>
         </div>
       </section>
 

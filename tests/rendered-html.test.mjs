@@ -29,9 +29,9 @@ test("server-renders the focused Source Twin launch website", async () => {
   assert.match(html, /<title>Source Twin \| Understand Software in Plain English<\/title>/i);
   assert.match(html, /Understand your software in plain English\./);
   assert.match(html, /subscription-service\/source-twin\//);
-  assert.match(html, /Follow one change from question to review\./);
-  assert.match(html, /A real multi-turn example/);
-  assert.match(html, /Before Source Twin/);
+  assert.match(html, /Follow one change from idea to review\./);
+  assert.match(html, /A real feature journey/);
+  assert.match(html, /Problem identified/);
   assert.match(html, /Twin file/);
   assert.match(html, /src\/subscriptions\.js/);
   assert.match(html, /tests\/subscriptions\.test\.js/);
@@ -39,11 +39,12 @@ test("server-renders the focused Source Twin launch website", async () => {
   for (const view of ["twin", "code", "tests", "terminal"]) {
     assert.match(html, new RegExp(`aria-labelledby="evidence-title-${view}"`));
   }
-  assert.match(html, /Three commands support the whole workflow\./);
+  assert.match(html, /Three commands\. One clear loop\./);
   assert.match(html, /The files are the product/);
   assert.match(html, /illustrative example/);
-  assert.match(html, /One readable layer for everyday software work\./);
-  assert.match(html, /Precise where support is proven/);
+  assert.match(html, /From a question to reviewed code\./);
+  assert.match(html, /Readable everywhere\. Deeper where proven\./);
+  assert.match(html, /source-twin-mark\.png/);
   assert.match(html, /npm install --save-dev sourcetwin/);
   assert.ok(html.includes(`<link rel="canonical" href="${expectedSiteUrl.href}"`));
   assert.ok(html.includes(`property="og:image" content="${new URL("/og.png", expectedSiteUrl).href}"`));
@@ -53,15 +54,17 @@ test("server-renders the focused Source Twin launch website", async () => {
 
 test("keeps the launch experience interactive, accessible, responsive, and modular", async () => {
   const [
-    page, evolution, walkthrough, fileExplorer, launch, responsiveCss,
-    evolutionCss, layout, siteUrl, robots, sitemap, packageJson,
+    page, evolution, walkthrough, fileExplorer, launch, product, responsiveCss,
+    baseCss, evolutionCss, layout, siteUrl, robots, sitemap, packageJson,
   ] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/components/evolution-demo.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/walkthrough-data.ts", import.meta.url), "utf8"),
     readFile(new URL("../app/components/file-explorer.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/components/launch-overview.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/components/product-overview.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/styles/responsive.css", import.meta.url), "utf8"),
+    readFile(new URL("../app/styles/base.css", import.meta.url), "utf8"),
     readFile(new URL("../app/styles/evolution.css", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/site-url.ts", import.meta.url), "utf8"),
@@ -83,6 +86,9 @@ test("keeps the launch experience interactive, accessible, responsive, and modul
   assert.match(fileExplorer, /aria-live="polite"/);
   assert.match(fileExplorer, /illustrative example/);
   assert.match(launch, /<table className="support-table">/);
+  assert.match(launch, /support-panel/);
+  assert.match(launch, /How does cancellation work now\?/);
+  assert.match(product, /command-panel/);
   assert.match(launch, /scope="col"/);
   assert.match(launch, /scope="row"/);
   assert.match(launch, /Source Twin installation commands/);
@@ -91,6 +97,9 @@ test("keeps the launch experience interactive, accessible, responsive, and modul
   assert.match(responsiveCss, /@media \(max-width: 760px\)/);
   assert.match(responsiveCss, /\.evidence-board \{ grid-template-columns: 1fr; \}/);
   assert.match(responsiveCss, /prefers-reduced-motion: reduce/);
+  assert.match(responsiveCss, /animation-duration: \.001ms !important/);
+  assert.match(baseCss, /@keyframes rise-in/);
+  assert.match(evolutionCss, /@keyframes stage-change/);
   assert.match(layout, /title: "Source Twin \| Understand Software in Plain English"/);
   assert.match(layout, /alternates: \{ canonical: "\/" \}/);
   assert.match(siteUrl, /NEXT_PUBLIC_SITE_URL/);
@@ -107,6 +116,7 @@ test("keeps the launch experience interactive, accessible, responsive, and modul
   assert.ok(evolution.split("\n").length < 180, "the walkthrough should stay focused");
   assert.ok(fileExplorer.split("\n").length < 180, "the file explorer should stay focused");
   assert.ok(launch.split("\n").length < 150, "the launch overview should stay focused");
+  assert.ok(product.split("\n").length < 150, "the product overview should stay focused");
 
   await assert.rejects(access(new URL("../app/_sites-preview", import.meta.url)));
 });
@@ -128,11 +138,22 @@ test("keeps the displayed hero example and command evidence accurate", () => {
 });
 
 test("ships a correctly sized social preview", async () => {
-  const image = await readFile(new URL("../public/og.png", import.meta.url));
+  const [image, mark, icon, favicon] = await Promise.all([
+    readFile(new URL("../public/og.png", import.meta.url)),
+    readFile(new URL("../public/source-twin-mark.png", import.meta.url)),
+    readFile(new URL("../app/icon.png", import.meta.url)),
+    readFile(new URL("../app/favicon.ico", import.meta.url)),
+  ]);
 
   assert.equal(image.subarray(1, 4).toString("ascii"), "PNG");
   assert.equal(image.readUInt32BE(16), 1200);
   assert.equal(image.readUInt32BE(20), 630);
+  assert.equal(mark.subarray(1, 4).toString("ascii"), "PNG");
+  assert.equal(mark.readUInt32BE(16), 1000);
+  assert.equal(mark.readUInt32BE(20), 1000);
+  assert.equal(icon.readUInt32BE(16), 512);
+  assert.equal(icon.readUInt32BE(20), 512);
+  assert.equal(favicon.subarray(0, 4).toString("hex"), "00000100");
 });
 
 test("serves robots and sitemap discovery routes", async () => {

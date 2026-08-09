@@ -8,7 +8,7 @@
 .evolution-step--active { color: var(--ink); background: rgba(255,255,255,.52); box-shadow: inset 0 -3px var(--green); }
 .evolution-step--active > span { color: white; border-color: var(--green); background: var(--green); }
 
-.evolution-body { min-height: 720px; display: grid; grid-template-columns: 410px 1fr; }
+.evolution-body { min-height: 720px; display: grid; grid-template-columns: 410px 1fr; animation: stage-change .24s ease-out both; }
 .evolution-context { display: flex; flex-direction: column; padding: 40px 36px 30px; border-right: 1px solid var(--line); background: #f4f2ec; }
 .evolution-state { display: flex; align-items: center; gap: 8px; color: var(--green); font-family: var(--font-geist-mono), monospace; font-size: 11px; font-weight: 700; text-transform: uppercase; }
 .evolution-counter { margin-top: 24px; color: #929994; font-family: var(--font-geist-mono), monospace; font-size: 11px; }
@@ -46,3 +46,5 @@
 .evidence-line--remove { color: #ebc3bd; background: rgba(157,68,57,.17); }
 .evidence-line--remove > span { color: #d88478; }
 .evidence-line--muted { color: #728984; font-style: italic; }
+
+@keyframes stage-change { from { opacity: .72; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }

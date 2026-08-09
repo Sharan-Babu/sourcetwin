@@ -10,6 +10,7 @@
   .file-inspector { grid-column: 1 / -1; border-top: 1px solid var(--line); border-left: 0; }
   .file-inspector > p { min-height: 0; margin-bottom: 24px; }
   .uses-grid { grid-template-columns: repeat(2, 1fr); }
+  .support-panel { grid-template-columns: 1fr; }
   .start-section { grid-template-columns: 1fr; gap: 42px; }
 }
 
@@ -43,16 +44,17 @@
   .evolution-evidence { min-height: 0; }
   .evidence-line { padding-right: 12px; }
   .command-grid { grid-template-columns: 1fr; }
-  .command-grid article { min-height: 190px; }
-  .command-grid p { margin-top: 48px; }
+  .command-grid article { min-height: 0; border-right: 0; border-bottom: 1px solid var(--line); }
+  .command-grid article:last-child { border-bottom: 0; }
   .help-strip { grid-template-columns: 1fr; gap: 7px; padding: 17px 20px; }
   .format-workbench { display: block; }
   .file-tree { border-right: 0; border-bottom: 1px solid var(--line); }
   .markdown-card pre { padding: 24px 18px; }
   .file-inspector { border-left: 0; }
   .uses-grid { grid-template-columns: 1fr; }
-  .uses-grid article { min-height: 225px; }
-  .uses-grid h3 { margin-top: 54px; }
+  .uses-grid article { min-height: 0; }
+  .uses-grid article > div small { max-width: 180px; }
+  .support-panel { padding: 24px 18px; }
   .support-table th, .support-table td { padding: 18px 16px; }
   .support-table tbody th { width: 42%; }
   .start-section { padding: 45px 24px; }
@@ -69,4 +71,5 @@
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
 }

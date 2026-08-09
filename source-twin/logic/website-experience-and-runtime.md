@@ -7,11 +7,14 @@ source:
     - app/robots.ts
     - app/site-url.ts
     - app/sitemap.ts
+    - app/icon.png
+    - app/favicon.ico
     - app/components/**
     - app/walkthrough-data.ts
     - app/hero-example.ts
     - app/globals.css
     - app/styles/**
+    - public/source-twin-mark.png
     - worker/index.ts
     - build/sites-vite-plugin.ts
     - vite.config.ts
@@ -22,9 +25,9 @@ source:
 ---
 # Website experience and runtime
 
-The private website server-renders one focused Source Twin launch page. It introduces the readable file format, walks through a substantial multi-turn subscription change, explains the three commands, lets visitors inspect example files, shows practical use cases and language support, and ends with installation guidance. Public copy stays natural, concise, and free of the punctuation patterns rejected by the product writing guidance.
+The private website server-renders one focused Source Twin launch page. A simple pair of mirrored code chevrons identifies Source Twin in the header, footer, browser icon, and favicon. The page introduces the readable file format, walks through a substantial subscription change from product problem to review, explains the three-command loop, lets visitors inspect example files, shows practical use cases and compact language support, and ends with installation guidance. Public copy stays natural, concise, and free of the punctuation patterns rejected by the product writing guidance.
 
-Two client interactions let readers move through a project-evolution walkthrough and inspect representative Source Twin files. Each walkthrough stage includes a condensed human and agent exchange from a tested coding-agent scenario. Its evidence board keeps the twin file, code, tests, and terminal result visible together, using two columns on larger screens and one readable column on small screens. The file explorer announces changed content to assistive technology. The language support section uses real table headings and row headings. The layout adapts at smaller widths and respects reduced-motion preferences.
+Two client interactions let readers move through a project-evolution walkthrough and inspect representative Source Twin files. Each walkthrough stage includes a condensed human and agent exchange from a tested coding-agent scenario. Its evidence board keeps the twin file, code, tests, and terminal result visible together, using two columns on larger screens and one readable column on small screens. The command loop uses one compact terminal-like surface. The everyday workflow uses four concise example cards, and language support fits in one contained panel. The file explorer announces changed content to assistive technology. The language support section uses real table headings and row headings. Subtle load, hover, and stage-change motion supports orientation without blocking use, and reduced-motion preferences disable it. The layout adapts at smaller widths without horizontal overflow.
 
 Vite and vinext build the page through the Cloudflare RSC environment. The worker is the request entrypoint, and the local configuration supports optional D1/R2 bindings plus project-local build state. A small Sites plugin packages hosting metadata after the bundle completes. Styles and hosting configuration are important runtime evidence, but remain declarative file mappings rather than entity inventory.
 
@@ -33,7 +36,8 @@ The walkthrough identifies its tested scenario as the basis for the condensed ex
 ## Test coverage
 
 - The server response has the expected title, product promise, walkthrough, files, use cases, language support, and installation guidance.
+- Brand assets exist at the expected dimensions and the favicon is a valid icon file.
 - Client components use state, visible evidence cards, linked panels, and live content with the accessibility relationships described above.
-- The page remains modular, responsive, and reduced-motion aware.
+- The page remains modular, compact, responsive, and reduced-motion aware.
 - Canonical and social metadata render with the configured site URL, and robots and sitemap routes are reachable.
 - Preview-only artifacts and disallowed presentation dependencies are absent.

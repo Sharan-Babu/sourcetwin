@@ -1,18 +1,26 @@
-.uses-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
-.uses-grid article { min-height: 270px; padding: 27px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.uses-grid article > span { color: var(--green); font-family: var(--font-geist-mono), monospace; font-size: 11px; }
-.uses-grid h3 { margin: 76px 0 11px; font-size: 22px; font-weight: 600; letter-spacing: -.035em; }
-.uses-grid p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+.uses-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 8px; border: 1px solid #b9c8bd; border-radius: 12px; background: #dde8df; }
+.uses-grid article { min-height: 194px; padding: 23px; border: 1px solid #c8d2ca; border-radius: 8px; background: var(--surface); box-shadow: inset 0 3px 0 #75a78e; transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
+.uses-grid article:hover { position: relative; z-index: 1; border-color: #91ae9d; box-shadow: inset 0 3px 0 var(--green), 0 10px 24px rgba(40,74,56,.09); transform: translateY(-3px); }
+.uses-grid article > div { min-height: 35px; display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; }
+.uses-grid article > div span { color: var(--green); font-family: var(--font-geist-mono), monospace; font-size: 11px; font-weight: 700; }
+.uses-grid article > div small { max-width: 130px; color: #88908b; text-align: right; font-size: 10px; line-height: 1.35; text-transform: uppercase; }
+.uses-grid h3 { margin: 24px 0 12px; font-size: 22px; font-weight: 600; letter-spacing: -.035em; }
+.uses-grid p { margin: 0; color: #43514b; font-size: 13px; font-weight: 600; line-height: 1.55; }
 
-.support-table { width: 100%; overflow: hidden; border: 1px solid var(--line); border-spacing: 0; border-radius: 10px; background: rgba(255,255,255,.3); }
-.support-table th, .support-table td { min-height: 68px; padding: 22px 25px; text-align: left; border-bottom: 1px solid var(--line); }
+.support-section { width: min(1200px, calc(100% - 48px)); }
+.support-panel { display: grid; grid-template-columns: .72fr 1.28fr; gap: 34px; padding: 34px; border: 1px solid #b8bcb6; border-radius: 12px; background: rgba(255,255,255,.24); }
+.support-copy { align-self: center; padding: 8px 12px 8px 4px; }
+.support-copy h2 { margin: 14px 0 16px; font-size: clamp(34px, 4vw, 48px); font-weight: 575; letter-spacing: -.055em; line-height: 1.02; }
+.support-copy p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+.support-copy small { display: block; margin-top: 22px; color: #7e8782; font-size: 11px; line-height: 1.55; }
+.support-table { width: 100%; overflow: hidden; border: 1px solid var(--line); border-spacing: 0; border-radius: 9px; background: var(--surface); }
+.support-table th, .support-table td { padding: 14px 18px; text-align: left; border-bottom: 1px solid var(--line); }
 .support-table thead th { color: #7e8782; background: #e8e5dd; font-family: var(--font-geist-mono), monospace; font-size: 11px; font-weight: 600; text-transform: uppercase; }
-.support-table tbody th { width: 35%; font-size: 14px; }
-.support-table td { color: var(--muted); font-size: 13px; line-height: 1.5; }
+.support-table tbody th { width: 36%; font-size: 12px; }
+.support-table td { color: var(--muted); font-size: 12px; line-height: 1.45; }
 .support-table tbody tr:last-child th, .support-table tbody tr:last-child td { border-bottom: 0; }
-.support-note { margin: 15px 0 0; color: #7e8782; font-size: 12px; }
 
-.start-section { width: min(1420px, calc(100% - 48px)); display: grid; grid-template-columns: 1fr .9fr; align-items: center; gap: 90px; padding: 72px; color: #e4ece8; border-radius: 14px; background: var(--navy); }
+.start-section { width: min(1200px, calc(100% - 48px)); display: grid; grid-template-columns: 1fr .9fr; align-items: center; gap: 70px; padding: 60px; color: #e4ece8; border-radius: 14px; background: var(--navy); }
 .start-section h2 { max-width: 650px; margin: 14px 0 18px; font-size: clamp(42px, 5vw, 66px); font-weight: 570; letter-spacing: -.06em; line-height: 1; }
 .start-section > div > p { max-width: 570px; margin: 0; color: #afbfba; font-size: 15px; line-height: 1.7; }
 .start-commands { overflow: hidden; border: 1px solid #405355; border-radius: 9px; background: #102022; }

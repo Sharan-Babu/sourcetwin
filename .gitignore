@@ -14,6 +14,7 @@
 **/coverage/
 !packages/sourcetwin/src/coverage/
 !packages/sourcetwin/src/coverage/**
+/.playwright-mcp/
 
 # next.js
 /.next/

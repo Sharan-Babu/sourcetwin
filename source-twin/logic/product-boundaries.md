@@ -18,7 +18,7 @@ source:
 ---
 # Product boundaries
 
-Source Twin is a version-controlled, plain-language mirror of software behavior. The publishable CLI validates and measures that mirror. This repository also contains a private website that explains the product through readable copy, a substantial interactive change, representative command output, file examples, use cases, and language support. The root guide introduces the product with a concrete logic file, then links to concise contribution, security, change, and license information.
+Source Twin is a version-controlled, plain-language mirror of software behavior. The publishable CLI validates and measures that mirror. This repository also contains a private website with a simple Source Twin symbol, a substantial interactive feature journey, compact command and language references, representative files, and concrete use cases. The root guide introduces the product with a concrete logic file, then links to concise contribution, security, change, and license information.
 
 The website is part of this repository and product, while remaining separate from the CLI implementation. Its examples must distinguish verified current behavior from illustrative or historical evidence. The viewer, MCP, LSP, automatic generation, and other deferred capabilities remain outside the implemented product boundary.
 

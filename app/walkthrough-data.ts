@@ -27,11 +27,11 @@ export const evidenceViews: { id: EvidenceView; label: string }[] = [
 
 export const walkthroughStages: WalkthroughStage[] = [
   {
-    id: "baseline", label: "Baseline", title: "A small service exists, but its logic lives only in code.",
-    summary: "Cancellation is immediate. Renewal adds time. Three tests cover the basic behavior.", state: "Before Source Twin",
+    id: "baseline", label: "Product idea", title: "A customer problem starts the work, not a command.",
+    summary: "Annual customers lose access as soon as they cancel. The team wants them to keep access until renewal.", state: "Problem identified",
     conversation: {
-      human: "How does cancellation work today? I need an answer I can share with the product team.",
-      agent: "I can inspect the code and tests, but there is no plain-language map to start from yet.",
+      human: "Annual customers should keep access until renewal. Can we change cancellation safely?",
+      agent: "First I will map how cancellation works today, which tests protect it, and where the change belongs.",
     },
     counts: { twin: "0 files", code: "2 functions", tests: "3 cases" },
     panels: {

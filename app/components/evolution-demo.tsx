@@ -21,12 +21,12 @@ export function EvolutionDemo() {
     <section className="section evolution-section" id="walkthrough">
       <div className="section-heading section-heading--split">
         <div>
-          <span className="kicker">A real multi-turn example</span>
-          <h2>Follow one change from question to review.</h2>
+          <span className="kicker">A real feature journey</span>
+          <h2>Follow one change from idea to review.</h2>
         </div>
         <p>
-          This subscription scenario comes from a real multi-turn test with a coding agent. Choose
-          a stage, then compare the readable twin, implementation, tests, and terminal result together.
+          Start with a customer problem, map today&apos;s behavior, agree on the change, then compare
+          the readable twin, implementation, tests, and terminal result together.
         </p>
       </div>
 
@@ -46,7 +46,7 @@ export function EvolutionDemo() {
           ))}
         </div>
 
-        <div className="evolution-body">
+        <div className="evolution-body" key={stage.id}>
           <aside className="evolution-context">
             <div className="evolution-state">{stage.state}</div>
             <div className="evolution-counter">Stage {stageIndex + 1} of {walkthroughStages.length}</div>
