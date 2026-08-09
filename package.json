@@ -41,13 +41,6 @@
     "wrangler": "4.92.0"
   },
   "type": "module",
-  "description": "Source Twin is a version-controlled, plain-language semantic mirror of a software codebase. It connects shared product terminology, intended behavior, observed implementation, source evidence, tests, and coverage.",
-  "main": "index.js",
-  "directories": {
-    "example": "examples",
-    "test": "tests"
-  },
-  "keywords": [],
-  "author": "",
+  "description": "The private product website and development workspace for Source Twin.",
   "license": "ISC"
 }

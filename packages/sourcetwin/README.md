@@ -1,41 +1,194 @@
 # Source Twin
 
-Source Twin keeps a reviewable, plain-language mirror of a codebase inside the same Git repository. It helps people and coding agents understand current behavior, discuss changes, and review whether code, tests, and product logic still agree.
+Source Twin keeps a reviewable, plain-language mirror of a codebase inside the same Git repository. It helps people and coding agents understand current behavior, agree on changes, and review whether code, tests, and product logic still match.
 
-Source Twin uses ordinary Markdown, YAML, Git, and three non-interactive commands. It does not require a viewer, MCP server, or a particular coding agent.
+It uses ordinary Markdown, YAML, Git, and three non-interactive commands. It does not require a viewer, MCP server, or a particular coding agent.
 
 ## Requirements
 
-- Node.js 22.12.0 or newer
+- Node.js 22.12 or newer
 - Git
 
-## Start
+## Install
 
-Install the CLI in the project and create the minimal foundation:
+Install Source Twin in the repository you want to describe:
 
 ```sh
 npm install --save-dev sourcetwin
-npm exec --offline -- sourcetwin init
+npx sourcetwin init
 ```
 
-`init` creates `source-twin/config.yml`, `source-twin/README.md`, and the canonical `source-twin/SKILL.md`. It does not invent product concepts or edit agent-specific instruction files. The coding agent should study the repository, propose the first conceptual areas, terms, and coverage scope, and ask for approval before creating canonical logic files.
+`init` creates only:
 
-Ask the user before adding a short root instruction that points an agent to `source-twin/SKILL.md`, or installing that skill through the agent's project-skill mechanism. Keep the full workflow in one canonical skill so copies cannot drift.
+```text
+source-twin/
+├── README.md
+├── SKILL.md
+└── config.yml
+```
+
+It refuses to overwrite an existing twin. It does not invent product concepts or change agent-specific instruction files.
+
+## Start with your coding agent
+
+Ask the agent to read `source-twin/SKILL.md`, the repository-specific README, and the config. Then ask it to study the repository and propose:
+
+1. The first few conceptual logic files.
+2. Shared terms worth defining once.
+3. The code and test scope that coverage should measure.
+
+Approve that proposal before the agent creates canonical logic. This keeps the product structure under human control.
+
+If your agent needs a root-level pointer or an installed project skill, `init` prints integration guidance. Ask before adding that pointer. Keep the complete workflow in the one canonical `source-twin/SKILL.md` so copies cannot drift.
+
+## A logic file
+
+```markdown
+---
+id: subscriptions.cancellation
+source:
+  code:
+    - src/subscriptions.ts#cancelSubscription
+  tests:
+    - tests/subscriptions.test.ts#annual customer cancellation waits for renewal
+---
+# Cancel a subscription
+
+A customer cancelling an annual {{subscription}} keeps access until renewal.
+Monthly customer cancellations and all administrator cancellations happen immediately.
+
+## Test coverage
+
+- Repeating a scheduled cancellation keeps the original date.
+- A scheduled cancellation becomes final at renewal.
+```
+
+The file mirrors current behavior. During a twin-first change it can temporarily describe the approved next state while code and tests catch up.
+
+Shared terms live under `source-twin/terms/`:
+
+```markdown
+---
+id: subscription
+---
+# Subscription
+
+A customer's continuing access to a paid product or service.
+```
+
+Use normal Markdown links between logic files and `{{subscription}}` when the shared term should keep the same meaning across the twin.
+
+## Configure measured scope
+
+`source-twin/config.yml` controls which code, tests, and entity types coverage inspects.
+
+```yaml
+schema: 1
+coverage:
+  code:
+    include: [src/**/*.ts]
+    exclude: []
+    entities: [function]
+  tests:
+    include: [tests/**/*.test.ts]
+    exclude: []
+    entities: [test]
+```
+
+An empty `entities` list requests path-only coverage. Coverage scope is separate for code and tests.
 
 ## Commands
 
-- `sourcetwin init` creates the minimal foundation and refuses to overwrite it.
-- `sourcetwin check` validates configuration, Markdown, terms, links, mappings, and exact locators.
-- `sourcetwin check --base <git-ref>` also identifies twin-first, mapped-source-only, paired, and supporting changes against any explicit branch, tag, or commit.
-- `sourcetwin coverage` reports code and test scope separately, including direct, file-level, module-level, unmapped, broken, and unsupported areas.
-- `sourcetwin help config|logic|terms|rules` provides the version-matched format reference offline.
+### `sourcetwin init`
 
-Every command supports `--root <path>` and `--json`. Coverage gaps are informational; malformed authored content and unsupported analysis setup make validation fail.
+Creates the minimal Source Twin foundation. It fails if `source-twin/` already exists.
 
-## Daily workflow
+### `sourcetwin check`
 
-Read the repository's `source-twin/SKILL.md`, README, and config before relying on the twin. For a twin-first change, agree on the next behavior in canonical prose, implement the code and tests, then review both diffs together. For a code-first change, inspect affected mappings and restore the twin to an accurate description before finishing.
+Validates configuration, Markdown, terms, links, mappings, inventory rules, and exact locators.
 
-Source Twin currently inventories functions and qualified methods in JavaScript, TypeScript, Python, Go, Rust, and Java. It inventories common JavaScript, TypeScript, Python, and Go tests. Other languages retain path-level validation, and version-controlled ast-grep rules can add project entities such as routes or jobs.
+```sh
+npx sourcetwin check
+npx sourcetwin check --base main
+```
 
-Structural coverage shows what is connected. It does not prove that the plain-language explanation is complete or correct.
+With `--base <git-ref>`, check also reports twin-only, mapped-source-only, paired, setup, and supporting changes. The comparison can be any branch, tag, or commit. Source Twin never guesses it.
+
+### `sourcetwin coverage`
+
+Inventories the configured code and test scope independently.
+
+```sh
+npx sourcetwin coverage
+```
+
+It reports direct, file-level, module-level, unmapped, broken, and unsupported areas. Gaps are informational. Invalid configuration or failed analysis still makes the command fail.
+
+### Offline help
+
+```sh
+npx sourcetwin help config
+npx sourcetwin help logic
+npx sourcetwin help terms
+npx sourcetwin help rules
+```
+
+The help matches the installed CLI version. Every command also supports `--help`, `--root <path>`, and `--json`.
+
+## Daily workflows
+
+For a twin-first change:
+
+1. Agree on the next behavior in the canonical English file.
+2. Review that intent in Git.
+3. Implement the code and tests.
+4. Run `check`, `coverage`, and the project tests.
+5. Review the twin, code, and tests together.
+
+For a code-first change:
+
+1. Inspect changed code and tests against an explicit Git base.
+2. Use existing mappings to find the affected logic.
+3. Update only the passages that no longer describe current behavior.
+4. Validate and review both sides together.
+
+## Language support
+
+| Language | Code entities | Test entities |
+| --- | --- | --- |
+| JavaScript and TypeScript | Functions and methods | Common `test` and `it` cases |
+| Python | Functions and methods | Pytest-style tests |
+| Go | Functions and methods | Go tests |
+| Rust and Java | Functions and methods | Path-level validation |
+| Other languages | Path-level validation | Path-level validation |
+
+Project-owned ast-grep rules can add readable entity types such as `POST /subscriptions/cancel` or a background job. Source Twin does not expose arbitrary executable plugins in the first release.
+
+## Programmatic output
+
+The package exports the typed `CommandResult` contract and two small helpers. This lets another tool render the same text or JSON and use the same success exit code without reimplementing Source Twin output.
+
+```ts
+import { exitCodeFor, renderResult, type CommandResult } from "sourcetwin";
+
+const result: CommandResult = {
+  command: "example",
+  ok: true,
+  summary: "Source Twin is valid.",
+  details: [],
+  diagnostics: [],
+  data: {},
+};
+
+process.stdout.write(renderResult(result, { json: false }));
+process.exitCode = exitCodeFor(result);
+```
+
+The analysis commands are not part of this public API. Use the CLI when you need to initialize, validate, or measure a repository.
+
+## Important limits
+
+- Structural coverage proves that source or tests are connected to the twin. It does not prove the English is complete or correct.
+- Source Twin does not silently turn prose into code.
+- Source Twin does not automatically write or refresh canonical files.
+- A coding agent and human still review meaning, uncertainty, and product decisions.

@@ -13,12 +13,13 @@ source:
     - .github/workflows/ci.yml
   tests:
     - packages/sourcetwin/tests/package.test.ts
+    - packages/sourcetwin/tests/docs.test.ts
     - packages/sourcetwin/tests/help-examples.test.ts
     - packages/sourcetwin/tests/skill-template.test.ts
 ---
 # Package distribution and CI
 
-The CLI is one publishable npm workspace package for Node.js 22.12.0 or newer. Its package contains the compiled command, structural inventory dependency, license, README, and user guidance. The package exposes a small public API as well as the `sourcetwin` executable.
+The CLI is one publishable npm workspace package for Node.js 22.12.0 or newer. Its package contains the compiled command, structural inventory dependency, license, README, and user guidance. The package exposes a small public API as well as the `sourcetwin` executable. The package guide explains setup, agent use, canonical files, commands, language support, and clear limits through one consistent example.
 
 Initialized repositories receive the same agent-neutral skill and version-matched offline help. The skill directs agents to read local guidance, propose concepts before authoring, distinguish current behavior from proposals, and review Source Twin with code and tests.
 
@@ -30,3 +31,4 @@ CI checks the package on Linux, macOS, and Windows. Repository quality also cove
 - Help examples validate and measure against real temporary repositories.
 - The initialized skill and repository copy remain identical.
 - The CI matrix exercises package checks on three operating systems.
+- Public guides retain the required commands, boundaries, and agreed natural punctuation.

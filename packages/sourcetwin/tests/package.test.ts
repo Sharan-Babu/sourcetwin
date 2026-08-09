@@ -71,7 +71,14 @@ describe("published package", () => {
   });
 
   it("exports its public API", async () => {
-    const script = "import { exitCodeFor } from 'sourcetwin'; console.log(exitCodeFor({ ok: true }));";
+    const script = `
+      import { exitCodeFor, renderResult } from 'sourcetwin';
+      const result = {
+        command: 'example', ok: true, summary: 'Ready.', details: [], diagnostics: [], data: {}
+      };
+      process.stdout.write(renderResult(result, { json: false }));
+      console.log(exitCodeFor(result));
+    `;
     const { stderr, stdout } = await execFileAsync(
       process.execPath,
       ["--input-type=module", "--eval", script],
@@ -79,7 +86,7 @@ describe("published package", () => {
     );
 
     expect(stderr).toBe("");
-    expect(stdout).toBe("0\n");
+    expect(stdout).toBe("Ready.\n0\n");
   });
 
   it("contains its CLI entry point, metadata, and user documentation", async () => {
@@ -96,7 +103,7 @@ describe("published package", () => {
     expect(manifest.engines?.node).toContain(">=22");
     expect(manifest.license).toBe("ISC");
     await expect(readFile(join(installedRoot, "README.md"), "utf8"))
-      .resolves.toContain("sourcetwin check --base <git-ref>");
+      .resolves.toContain("sourcetwin check --base main");
     await expect(readFile(join(installedRoot, "LICENSE"), "utf8"))
       .resolves.toContain("ISC License");
   });

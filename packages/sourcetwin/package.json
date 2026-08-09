@@ -2,6 +2,7 @@
   "name": "sourcetwin",
   "version": "0.1.0",
   "description": "A version-controlled, plain-language semantic twin of a codebase.",
+  "author": "Source Twin contributors",
   "license": "ISC",
   "keywords": [
     "ai-agents",
