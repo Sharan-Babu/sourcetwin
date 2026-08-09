@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { siteUrl } from "./site-url";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,19 +14,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://english-code-concept.sharan19.chatgpt.site"),
-  title: "Source Twin | Readable Software Logic",
+  metadataBase: siteUrl,
+  title: "Source Twin | Understand Software in Plain English",
   description:
-    "A version-controlled, plain-language semantic twin connected to source code, tests, coverage, and Git review.",
+    "Keep a readable mirror of your software beside the code. Understand behavior, plan changes, and review code and tests with your coding agent.",
+  alternates: { canonical: "/" },
   openGraph: {
     title: "Source Twin",
-    description: "Read the software without translating the code.",
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Source Twin connects readable product logic to source code." }],
+    description: "Understand your software in plain English.",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "A readable Source Twin file connected to code and tests." }],
+    locale: "en_US",
+    type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Source Twin",
-    description: "Read the software without translating the code.",
+    description: "Understand your software in plain English.",
     images: ["/og.png"],
   },
 };

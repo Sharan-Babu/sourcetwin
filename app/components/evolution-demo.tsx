@@ -27,12 +27,12 @@ export function EvolutionDemo() {
     <section className="section evolution-section" id="walkthrough">
       <div className="section-heading section-heading--split">
         <div>
-          <span className="kicker">A real project, step by step</span>
-          <h2>Watch the twin and code evolve together.</h2>
+          <span className="kicker">A real multi-turn example</span>
+          <h2>Follow one change from question to review.</h2>
         </div>
         <p>
-          This is the subscription example exercised with Luna. Move through each stage, then switch
-          between the twin, implementation, tests, and terminal evidence.
+          This subscription scenario comes from a real multi-turn test with a coding agent. Choose
+          a stage, then inspect the readable twin, implementation, tests, or terminal result.
         </p>
       </div>
 
@@ -54,10 +54,15 @@ export function EvolutionDemo() {
 
         <div className="evolution-body">
           <aside className="evolution-context">
-            <div className="evolution-state"><i /> {stage.state}</div>
+            <div className="evolution-state">{stage.state}</div>
             <div className="evolution-counter">Stage {stageIndex + 1} of {walkthroughStages.length}</div>
             <h3>{stage.title}</h3>
             <p>{stage.summary}</p>
+
+            <div className="walkthrough-conversation">
+              <div><span>You</span><p>{stage.conversation.human}</p></div>
+              <div><span>Agent</span><p>{stage.conversation.agent}</p></div>
+            </div>
 
             <div className="evolution-counts">
               <div><span>Twin</span><strong>{stage.counts.twin}</strong></div>

@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @import "./styles/base.css";
-@import "./styles/flows.css";
 @import "./styles/evolution.css";
 @import "./styles/product.css";
-@import "./styles/system.css";
+@import "./styles/launch.css";
 @import "./styles/responsive.css";

@@ -10,16 +10,15 @@ source:
     - package.json
     - packages/sourcetwin/README.md
     - packages/sourcetwin/package.json
-    - app/product-data.ts
-    - app/components/repository-overview.tsx#RepositoryOverview
+    - app/components/launch-overview.tsx#LaunchOverview
     - source-twin/README.md
   tests:
-    - tests/rendered-html.test.mjs#server-renders the implemented Source Twin product overview
+    - tests/rendered-html.test.mjs#server-renders the focused Source Twin launch website
     - packages/sourcetwin/tests/docs.test.ts
 ---
 # Product boundaries
 
-Source Twin is a version-controlled, plain-language mirror of software behavior. The publishable CLI validates and measures that mirror. This repository also contains a private website that explains the product through readable copy, representative command output, interactive workflows, and a repository overview. The root guide introduces the product with a concrete logic file, then links to concise contribution, security, change, and license information.
+Source Twin is a version-controlled, plain-language mirror of software behavior. The publishable CLI validates and measures that mirror. This repository also contains a private website that explains the product through readable copy, a substantial interactive change, representative command output, file examples, use cases, and language support. The root guide introduces the product with a concrete logic file, then links to concise contribution, security, change, and license information.
 
 The website is part of this repository and product, while remaining separate from the CLI implementation. Its examples must distinguish verified current behavior from illustrative or historical evidence. The viewer, MCP, LSP, automatic generation, and other deferred capabilities remain outside the implemented product boundary.
 
@@ -28,4 +27,4 @@ The [CLI command workflow](cli-command-workflow.md), [package and CI behavior](p
 ## Test coverage
 
 - The website renders the implemented product overview with its principal sections and boundaries.
-- Repository descriptions identify the private website, publishable package, Source Twin files, and CI support.
+- The website keeps the implemented workflow, current limits, language support, and package relationship clear.

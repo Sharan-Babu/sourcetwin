@@ -1,9 +1,11 @@
 import { EvolutionDemo } from "./components/evolution-demo";
-import { FlowDemo } from "./components/flow-demo";
+import { LaunchOverview } from "./components/launch-overview";
 import { ProductOverview } from "./components/product-overview";
-import { RepositoryOverview } from "./components/repository-overview";
+import { heroExample } from "./hero-example";
 
 export default function Home() {
+  const [beforeTerm, afterTerm] = heroExample.paragraphs[0].split("{{subscription}}");
+
   return (
     <main id="top">
       <header className="site-header">
@@ -12,68 +14,65 @@ export default function Home() {
           <span>Source Twin</span>
         </a>
         <nav className="site-nav" aria-label="Page sections">
-          <a href="#flows">Workflows</a>
           <a href="#walkthrough">Walkthrough</a>
           <a href="#files">File format</a>
-          <a href="#capabilities">Capabilities</a>
-          <a href="#repository">Codebase</a>
+          <a href="#uses">Use cases</a>
         </nav>
-        <div className="release-state"><i /> Core workflow implemented</div>
+        <a className="header-action" href="#start">Get started</a>
       </header>
 
       <section className="hero">
         <div className="hero-copy">
-          <span className="kicker">Plain-language software logic, versioned with the code</span>
-          <h1>Read the software without translating the code.</h1>
+          <span className="kicker">A readable layer for every codebase</span>
+          <h1>Understand your software in plain English.</h1>
           <p>
-            Source Twin gives people and coding agents a shared, readable mirror of behavior. It stays
-            connected to real source, tests, terms, coverage, and Git review.
+            Source Twin keeps a readable mirror of your code beside the code itself. You and your
+            coding agent use the same files to explain behavior, plan changes, and review what happened.
           </p>
           <div className="hero-actions">
-            <a className="button button--primary" href="#flows">Explore the real workflows <span>↓</span></a>
-            <a className="button button--quiet" href="#files">See the file format</a>
+            <a className="button button--primary" href="#walkthrough">Walk through a real change <span>↓</span></a>
+            <a className="button button--quiet" href="#files">See the actual files</a>
           </div>
           <div className="hero-principles">
-            <span>Ordinary Markdown</span><span>No required viewer</span><span>Agent-neutral</span>
+            <span>Plain Markdown</span><span>Lives in Git</span><span>Works with existing coding agents</span>
           </div>
         </div>
 
-        <div className="hero-console" aria-label="Source Twin command overview">
-          <div className="console-title"><span><i /><i /><i /></span><small>subscription-service</small></div>
-          <div className="console-line"><b>$</b> npm exec --offline -- sourcetwin check --base HEAD</div>
-          <div className="console-result">
-            <p><span>✓</span> Source Twin is valid.</p>
-            <p><span>·</span> Logic files <b>2</b> · Terms <b>3</b></p>
-            <p><span>·</span> Paired changes <b>2</b> · Broken <b>0</b></p>
+        <article className="hero-artifact" aria-label="Example Source Twin file">
+          <div className="artifact-top">
+            <span>{heroExample.path}</span>
+            <small>{heroExample.filename}</small>
           </div>
-          <div className="console-divider" />
-          <div className="console-line"><b>$</b> npm exec --offline -- sourcetwin coverage</div>
-          <div className="console-result">
-            <p><span>✓</span> Code entities <b>2 / 2 direct</b></p>
-            <p><span>✓</span> Test entities <b>11 / 11 direct</b></p>
-            <p><span>·</span> Structural evidence, not a semantic score.</p>
+          <div className="artifact-frontmatter">
+            {heroExample.frontmatter.map((line) => <code key={line}>{line || " "}</code>)}
           </div>
-          <div className="console-caption"><i /> Result from the real Luna validation flow</div>
-        </div>
+          <div className="artifact-body">
+            <span>Current behavior</span>
+            <h2>{heroExample.title}</h2>
+            <p>{beforeTerm}<code>{"{{subscription}}"}</code>{afterTerm}</p>
+            <p>{heroExample.paragraphs[1]}</p>
+          </div>
+          <div className="artifact-foot">
+            <span>Readable on its own</span>
+            <span>Connected to code and tests</span>
+          </div>
+        </article>
       </section>
 
-      <section className="proof-strip" aria-label="Current implementation proof">
-        <article><strong>3</strong><span>operational commands</span></article>
-        <article><strong>6</strong><span>proven code languages</span></article>
-        <article><strong>139</strong><span>CLI tests passing</span></article>
-        <article><strong>99.23%</strong><span>CLI line coverage</span></article>
-        <article><strong>3 OS</strong><span>package CI matrix</span></article>
+      <section className="foundation-strip" aria-label="Source Twin foundations">
+        <article><strong>Files first</strong><span>No viewer is required to understand the logic.</span></article>
+        <article><strong>Agent-neutral</strong><span>Use the coding agent and terminal you already have.</span></article>
+        <article><strong>Reviewable</strong><span>Logic, code, and tests change together in Git.</span></article>
       </section>
 
-      <FlowDemo />
       <EvolutionDemo />
       <ProductOverview />
-      <RepositoryOverview />
+      <LaunchOverview />
 
       <footer>
         <div className="brand"><span className="brand-mark">ST</span><span>Source Twin</span></div>
-        <p>The readable layer between product intent and implementation.</p>
-        <a href="#top">Back to top ↑</a>
+        <p>A readable mirror for software and the people who shape it.</p>
+        <div className="footer-links"><a href="#files">Files</a><a href="#start">Install</a><a href="#top">Back to top</a></div>
       </footer>
     </main>
   );

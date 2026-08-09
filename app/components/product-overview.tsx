@@ -1,4 +1,3 @@
-import { capabilities } from "../product-data";
 import { FileExplorer } from "./file-explorer";
 
 const commands = [
@@ -12,9 +11,9 @@ export function ProductOverview() {
     <>
       <section className="section command-section" id="commands">
         <div className="section-heading">
-          <span className="kicker">A deliberately small CLI</span>
-          <h2>Three commands complete the core loop.</h2>
-          <p>Offline help documents the formats. Existing agents, Git, and search tools handle everything else.</p>
+          <span className="kicker">A small tool by design</span>
+          <h2>Three commands support the whole workflow.</h2>
+          <p>Your coding agent, Git, and normal search tools handle the rest.</p>
         </div>
 
         <div className="command-grid">
@@ -48,21 +47,6 @@ export function ProductOverview() {
         <FileExplorer />
       </section>
 
-      <section className="section capability-section" id="capabilities">
-        <div className="section-heading">
-          <span className="kicker">Implemented today</span>
-          <h2>A complete workflow, without a platform around it.</h2>
-        </div>
-        <div className="capability-grid">
-          {capabilities.map(([title, description], index) => (
-            <article key={title}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <h3>{title}</h3>
-              <p>{description}</p>
-            </article>
-          ))}
-        </div>
-      </section>
     </>
   );
 }

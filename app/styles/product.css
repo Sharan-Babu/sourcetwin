@@ -40,9 +40,3 @@
 .file-inspector b, .file-inspector small { display: block; }
 .file-inspector b { font-size: 12px; }
 .file-inspector small { margin-top: 5px; color: #89908c; font-size: 11px; }
-
-.capability-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
-.capability-grid article { min-height: 250px; padding: 26px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.capability-grid article > span { color: var(--green); font-family: var(--font-geist-mono), monospace; font-size: 11px; }
-.capability-grid h3 { margin: 72px 0 9px; font-size: 15px; letter-spacing: -.025em; }
-.capability-grid p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.65; }
