@@ -1,0 +1,48 @@
+.command-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.command-grid article { min-height: 225px; padding: 27px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.command-grid article > div { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.command-grid article > div span { color: #969c98; font-family: var(--font-geist-mono), monospace; font-size: 11px; }
+.command-grid code { color: var(--green); font-family: var(--font-geist-mono), monospace; font-size: 13px; font-weight: 700; }
+.command-grid p { margin: 72px 0 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+.help-strip { min-height: 72px; display: grid; grid-template-columns: .8fr 1.2fr 1fr; align-items: center; gap: 30px; padding: 0 25px; border: 1px solid var(--line); border-top: 0; background: rgba(255,255,255,.35); }
+.help-strip > span { color: var(--green); font-size: 12px; font-weight: 700; }
+.help-strip code { font-family: var(--font-geist-mono), monospace; font-size: 12px; }
+.help-strip p { margin: 0; color: var(--muted); font-size: 12px; }
+
+.format-workbench { display: grid; grid-template-columns: 250px minmax(450px, 1fr) 300px; min-height: 600px; border: 1px solid #b5b8b1; border-radius: 13px; overflow: hidden; background: var(--surface); box-shadow: 0 28px 75px rgba(31, 42, 37, .08); }
+.file-tree { padding: 24px 15px; background: #ebe8e0; border-right: 1px solid var(--line); }
+.file-tree-top { display: flex; justify-content: space-between; gap: 10px; padding: 0 9px 16px; border-bottom: 1px solid var(--line); }
+.file-tree-top span { overflow: hidden; text-overflow: ellipsis; font-family: var(--font-geist-mono), monospace; font-size: 11px; font-weight: 700; }
+.file-tree-top small { flex: 0 0 auto; color: #8d938f; font-size: 11px; }
+.file-tree ul { margin: 0; padding: 0; list-style: none; }
+.file-tree > ul { margin-top: 15px; }
+.tree-group-row { margin: 0; padding: 0; }
+.tree-folder { min-height: 40px; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 9px; padding: 0 9px; color: var(--ink); font-size: 12px; }
+.tree-folder span { color: #969b97; font-size: 11px; }
+.tree-file { width: 100%; min-height: 44px; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 8px; padding: 0 9px; text-align: left; color: #5d6762; border: 0; border-radius: 5px; background: transparent; cursor: pointer; font-size: 12px; }
+.tree-file span { color: #969b97; font-size: 11px; }
+.tree-file:hover { color: var(--ink); background: rgba(255,255,255,.46); }
+.tree-child .tree-file { padding-left: 24px; }
+.tree-child .tree-file b::before { content: "└"; margin-right: 7px; color: #a3a7a3; }
+.tree-file--selected, .tree-file--selected:hover { color: var(--green); background: var(--surface); box-shadow: inset 3px 0 0 var(--green); }
+
+.markdown-card { min-width: 0; background: var(--surface); }
+.markdown-top { height: 54px; display: flex; align-items: center; justify-content: space-between; padding: 0 22px; border-bottom: 1px solid var(--line); }
+.markdown-top span { font-family: var(--font-geist-mono), monospace; font-size: 12px; font-weight: 700; }
+.markdown-top small { color: #8b918d; font-size: 11px; }
+.markdown-card pre { margin: 0; padding: 30px; overflow-x: auto; }
+.markdown-card code { color: #35423c; font-family: var(--font-geist-mono), monospace; font-size: 12px; line-height: 1.75; }
+.file-inspector { padding: 30px 25px; background: #f5f3ed; border-left: 1px solid var(--line); }
+.file-inspector > span { color: var(--green); font-family: var(--font-geist-mono), monospace; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+.file-inspector h3 { margin: 14px 0 8px; font-size: 20px; letter-spacing: -.035em; }
+.file-inspector > p { min-height: 118px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+.file-inspector > div { padding: 18px 0; border-top: 1px solid var(--line); }
+.file-inspector b, .file-inspector small { display: block; }
+.file-inspector b { font-size: 12px; }
+.file-inspector small { margin-top: 5px; color: #89908c; font-size: 11px; }
+
+.capability-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.capability-grid article { min-height: 250px; padding: 26px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.capability-grid article > span { color: var(--green); font-family: var(--font-geist-mono), monospace; font-size: 11px; }
+.capability-grid h3 { margin: 72px 0 9px; font-size: 15px; letter-spacing: -.025em; }
+.capability-grid p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.65; }

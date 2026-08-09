@@ -3,13 +3,19 @@ coverage:
   code:
     include:
       - packages/sourcetwin/src/**/*.ts
-    exclude:
-      - packages/sourcetwin/src/cli.ts
+      - app/**/*.ts
+      - app/**/*.tsx
+      - worker/**/*.ts
+      - build/**/*.ts
+      - vite.config.ts
+      - next.config.ts
+    exclude: []
     entities:
       - function
   tests:
     include:
       - packages/sourcetwin/tests/**/*.ts
+      - tests/**/*.mjs
     exclude:
       - packages/sourcetwin/tests/helpers/**
     entities:

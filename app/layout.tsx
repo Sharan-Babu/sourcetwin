@@ -14,18 +14,18 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://english-code-concept.sharan19.chatgpt.site"),
-  title: "Source Twin — Interactive Product Concept",
+  title: "Source Twin | Readable Software Logic",
   description:
-    "Experience a plain-language semantic twin of a codebase: understand behavior, change intent, review impact, and hand work to a coding agent.",
+    "A version-controlled, plain-language semantic twin connected to source code, tests, coverage, and Git review.",
   openGraph: {
     title: "Source Twin",
-    description: "Read the logic. Trace the evidence. Change the intent.",
+    description: "Read the software without translating the code.",
     images: [{ url: "/og.png", width: 1200, height: 630, alt: "Source Twin connects readable product logic to source code." }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Source Twin",
-    description: "Read the logic. Trace the evidence. Change the intent.",
+    description: "Read the software without translating the code.",
     images: ["/og.png"],
   },
 };

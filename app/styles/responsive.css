@@ -1,0 +1,85 @@
+@media (max-width: 1050px) {
+  .hero { grid-template-columns: 1fr; gap: 50px; }
+  .hero-console { width: min(720px, 100%); }
+  .flow-tabs { grid-template-columns: repeat(3, 1fr); }
+  .flow-tab:nth-child(-n+3) { border-bottom: 1px solid var(--line); }
+  .flow-stage { grid-template-columns: 1fr; }
+  .terminal-card { min-height: 430px; }
+  .evolution-steps { grid-template-columns: repeat(3, 1fr); padding: 0 10px; }
+  .evolution-step:nth-child(-n+3) { border-bottom: 1px solid var(--line); }
+  .evolution-body { grid-template-columns: 1fr; }
+  .evolution-context { min-height: 470px; border-right: 0; border-bottom: 1px solid var(--line); }
+  .format-workbench { grid-template-columns: 210px 1fr; }
+  .file-inspector { grid-column: 1 / -1; border-top: 1px solid var(--line); border-left: 0; }
+  .file-inspector > p { min-height: 0; margin-bottom: 24px; }
+  .capability-grid { grid-template-columns: repeat(2, 1fr); }
+  .repository-grid { grid-template-columns: 1fr; }
+  .boundary-section { grid-template-columns: 1fr; gap: 42px; }
+}
+
+@media (max-width: 760px) {
+  .site-header, .hero, .proof-strip, .section, .flow-section, .evolution-section, .boundary-section, footer { width: min(100% - 28px, 1420px); }
+  .site-header { grid-template-columns: 1fr auto; }
+  .site-nav { display: none; }
+  .hero { min-height: 0; padding: 60px 0 70px; }
+  .hero h1 { font-size: 52px; }
+  .hero-copy > p { font-size: 14px; }
+  .hero-actions { align-items: stretch; flex-direction: column; }
+  .hero-principles { gap: 10px 16px; }
+  .hero-console { border-radius: 9px; }
+  .console-line { overflow-x: auto; }
+  .proof-strip { grid-template-columns: repeat(2, 1fr); }
+  .proof-strip article { border-bottom: 1px solid var(--line); }
+  .proof-strip article:nth-child(2n) { border-right: 0; }
+  .proof-strip article:last-child { grid-column: 1 / -1; border-bottom: 0; }
+  .section { margin-top: 105px; }
+  .section-heading--split { grid-template-columns: 1fr; gap: 10px; }
+  .section-heading h2 { font-size: 40px; }
+  .flow-tabs { grid-template-columns: repeat(2, 1fr); }
+  .flow-tab:nth-child(-n+4) { border-bottom: 1px solid var(--line); }
+  .flow-story { padding: 35px 24px; }
+  .flow-story > h3 { font-size: 28px; }
+  .terminal-card { min-height: 0; margin: 10px; }
+  .flow-note { grid-template-columns: 1fr; gap: 6px; }
+  .evolution-steps { grid-template-columns: repeat(2, 1fr); }
+  .evolution-step:nth-child(-n+4) { border-bottom: 1px solid var(--line); }
+  .evolution-step::after { display: none; }
+  .evolution-context { min-height: 500px; padding: 34px 24px 25px; }
+  .evolution-workspace { padding: 12px; }
+  .evidence-tabs { width: 100%; }
+  .evidence-tab { flex: 1; padding-inline: 5px; }
+  .evolution-evidence { min-height: 470px; }
+  .evidence-line { padding-right: 12px; }
+  .command-grid, .capability-grid { grid-template-columns: 1fr; }
+  .command-grid article { min-height: 190px; }
+  .command-grid p, .capability-grid h3 { margin-top: 48px; }
+  .help-strip { grid-template-columns: 1fr; gap: 7px; padding: 17px 20px; }
+  .format-workbench { display: block; }
+  .file-tree { border-right: 0; border-bottom: 1px solid var(--line); }
+  .markdown-card pre { padding: 24px 18px; }
+  .file-inspector { border-left: 0; }
+  .system-person, .system-core { width: 100%; }
+  .system-split { width: 80%; padding: 0 15%; }
+  .system-leaves { grid-template-columns: 1fr; }
+  .coverage-legend { grid-template-columns: 1fr; }
+  .coverage-legend article { border-right: 0; border-bottom: 1px solid var(--line); }
+  .repository-tree article, .module-list article { grid-template-columns: 1fr; gap: 8px; }
+  .language-row { grid-template-columns: 1fr; gap: 6px; padding: 15px 20px; }
+  .language-head { display: none; }
+  .boundary-section { padding: 42px 25px; }
+  .boundary-columns { grid-template-columns: 1fr; }
+  footer { min-height: 180px; align-items: flex-start; justify-content: center; flex-direction: column; gap: 14px; }
+}
+
+@media (max-width: 430px) {
+  .release-state { display: none; }
+  .hero h1 { font-size: 45px; }
+  .flow-tab { min-height: 62px; }
+  .terminal-command { padding-inline: 18px; }
+  .terminal-output { padding-inline: 18px; }
+  .terminal-result { margin-inline: 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
