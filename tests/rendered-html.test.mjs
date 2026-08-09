@@ -6,13 +6,15 @@ import { heroExampleMarkdown } from "../app/hero-example.ts";
 import { walkthroughStages } from "../app/walkthrough-data.ts";
 import { logicFrontmatterSchema } from "../packages/sourcetwin/src/markdown/schema.ts";
 
-async function render() {
+const expectedSiteUrl = new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000");
+
+async function render(path = "/") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
   const { default: worker } = await import(workerUrl.href);
 
   return worker.fetch(
-    new Request("http://localhost/", { headers: { accept: "text/html" } }),
+    new Request(`http://localhost${path}`, { headers: { accept: "text/html" } }),
     { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },
     { waitUntil() {}, passThroughOnException() {} },
   );
@@ -37,6 +39,8 @@ test("server-renders the focused Source Twin launch website", async () => {
   assert.match(html, /One readable layer for everyday software work\./);
   assert.match(html, /Precise where support is proven/);
   assert.match(html, /npm install --save-dev sourcetwin/);
+  assert.ok(html.includes(`<link rel="canonical" href="${expectedSiteUrl.href}"`));
+  assert.ok(html.includes(`property="og:image" content="${new URL("/og.png", expectedSiteUrl).href}"`));
   assert.doesNotMatch(html, /Inside this repository|Core workflow implemented/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
 });
@@ -125,4 +129,15 @@ test("ships a correctly sized social preview", async () => {
   assert.equal(image.subarray(1, 4).toString("ascii"), "PNG");
   assert.equal(image.readUInt32BE(16), 1200);
   assert.equal(image.readUInt32BE(20), 630);
+});
+
+test("serves robots and sitemap discovery routes", async () => {
+  const [robots, sitemap] = await Promise.all([render("/robots.txt"), render("/sitemap.xml")]);
+
+  assert.equal(robots.status, 200);
+  assert.match(robots.headers.get("content-type") ?? "", /^text\/plain/i);
+  assert.ok((await robots.text()).includes(`Sitemap: ${new URL("/sitemap.xml", expectedSiteUrl).href}`));
+  assert.equal(sitemap.status, 200);
+  assert.match(sitemap.headers.get("content-type") ?? "", /xml/i);
+  assert.ok((await sitemap.text()).includes(`<loc>${expectedSiteUrl.href}</loc>`));
 });

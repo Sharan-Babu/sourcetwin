@@ -39,7 +39,7 @@ metadata:
 const TOPICS = {
   config: `# Configuration
 
-Store repository schema and measured scope in source-twin/config.yml. Paths and glob patterns are repository-relative. Empty include lists mean that scope is not configured; empty entities lists explicitly request path-only coverage. The built-in function kind includes functions and qualified methods for JavaScript, TypeScript, Python, Go, Rust, and Java. The built-in test kind supports common JavaScript and TypeScript test/it calls, pytest-style Python tests, and Go tests. Unsupported languages and kinds keep path-level validation and are reported by coverage.
+Store repository schema and measured scope in source-twin/config.yml. Paths and glob patterns are repository-relative. Each entities list contains kinds such as function or test, never file paths or source locators. Empty include lists mean that scope is not configured; empty entities lists explicitly request path-only coverage. The built-in function kind includes functions and qualified methods for JavaScript, TypeScript, Python, Go, Rust, and Java. The built-in test kind supports common JavaScript and TypeScript test/it calls, pytest-style Python tests, and Go tests. Unsupported languages and kinds keep path-level validation and are reported by coverage.
 
 \`\`\`yaml
 ${DEFAULT_CONFIG.trimEnd()}

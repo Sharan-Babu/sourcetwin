@@ -95,7 +95,7 @@ coverage:
     entities: [test]
 ```
 
-An empty `entities` list requests path-only coverage. Coverage scope is separate for code and tests.
+The `entities` lists contain kinds such as `function` or `test`, never file paths or source locators. An empty list requests path-only coverage. Coverage scope is separate for code and tests.
 
 ## Commands
 

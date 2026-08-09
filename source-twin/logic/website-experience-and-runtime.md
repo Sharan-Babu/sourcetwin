@@ -36,4 +36,5 @@ The walkthrough identifies its tested scenario as the basis for the condensed ex
 - The server response has the expected title, product promise, walkthrough, files, use cases, language support, and installation guidance.
 - Client components use state, keyboard-aware tabs, linked panels, and live content with the accessibility relationships described above.
 - The page remains modular, responsive, and reduced-motion aware.
+- Canonical and social metadata render with the configured site URL, and robots and sitemap routes are reachable.
 - Preview-only artifacts and disallowed presentation dependencies are absent.

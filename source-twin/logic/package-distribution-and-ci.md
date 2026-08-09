@@ -21,7 +21,7 @@ source:
 
 The CLI is one publishable npm workspace package for Node.js 22.12.0 or newer. Its package contains the compiled command, structural inventory dependency, license, README, and user guidance. The package exposes a small public API as well as the `sourcetwin` executable. The package guide explains setup, agent use, canonical files, commands, language support, and clear limits through one consistent example.
 
-Initialized repositories receive the same agent-neutral skill and version-matched offline help. The skill directs agents to read local guidance, propose concepts before authoring, distinguish current behavior from proposals, and review Source Twin with code and tests.
+Initialized repositories receive the same agent-neutral skill and version-matched offline help. The help makes clear that coverage entity lists contain kinds such as functions or tests, while source mappings contain file paths and locators. The skill directs agents to read local guidance, propose concepts before authoring, distinguish current behavior from proposals, and review Source Twin with code and tests.
 
 CI checks the package on Linux, macOS, and Windows. Repository quality also covers the private website, type checking, tests, linting, and dependency auditing. Package metadata, workflow YAML, and documentation are declarative evidence here; they are mapped as files rather than treated as function inventory.
 
