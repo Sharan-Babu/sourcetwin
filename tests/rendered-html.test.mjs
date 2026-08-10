@@ -29,8 +29,8 @@ test("server-renders the focused Source Twin launch website", async () => {
   assert.match(html, /<title>Source Twin \| Understand Software in Plain English<\/title>/i);
   assert.match(html, /Understand your software in plain English\./);
   assert.match(html, /subscription-service\/source-twin\//);
-  assert.match(html, /Follow one change from idea to review\./);
-  assert.match(html, /A real feature journey/);
+  assert.match(html, /Follow one change from idea to reviewed code\./);
+  assert.match(html, /See Source Twin in practice/);
   assert.match(html, /Problem identified/);
   assert.match(html, /Twin file/);
   assert.match(html, /src\/subscriptions\.js/);
@@ -40,7 +40,7 @@ test("server-renders the focused Source Twin launch website", async () => {
     assert.match(html, new RegExp(`aria-labelledby="evidence-title-${view}"`));
   }
   assert.match(html, /Three commands\. One clear loop\./);
-  assert.match(html, /The files are the product/);
+  assert.match(html, /The files behind the journey/);
   assert.match(html, /illustrative example/);
   assert.match(html, /From a question to reviewed code\./);
   assert.match(html, /Readable everywhere\. Deeper where proven\./);
@@ -54,10 +54,11 @@ test("server-renders the focused Source Twin launch website", async () => {
 
 test("keeps the launch experience interactive, accessible, responsive, and modular", async () => {
   const [
-    page, evolution, walkthrough, fileExplorer, launch, product, responsiveCss,
-    baseCss, evolutionCss, layout, siteUrl, robots, sitemap, packageJson,
+    page, practice, evolution, walkthrough, fileExplorer, launch, product, responsiveCss,
+    baseCss, evolutionCss, launchCss, layout, siteUrl, robots, sitemap, packageJson,
   ] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/components/practice-overview.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/components/evolution-demo.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/walkthrough-data.ts", import.meta.url), "utf8"),
     readFile(new URL("../app/components/file-explorer.tsx", import.meta.url), "utf8"),
@@ -66,6 +67,7 @@ test("keeps the launch experience interactive, accessible, responsive, and modul
     readFile(new URL("../app/styles/responsive.css", import.meta.url), "utf8"),
     readFile(new URL("../app/styles/base.css", import.meta.url), "utf8"),
     readFile(new URL("../app/styles/evolution.css", import.meta.url), "utf8"),
+    readFile(new URL("../app/styles/launch.css", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/site-url.ts", import.meta.url), "utf8"),
     readFile(new URL("../app/robots.ts", import.meta.url), "utf8"),
@@ -74,6 +76,10 @@ test("keeps the launch experience interactive, accessible, responsive, and modul
   ]);
 
   assert.match(evolution, /["']use client["']/);
+  assert.match(practice, /<EvolutionDemo \/>/);
+  assert.match(practice, /<FileExplorer \/>/);
+  assert.match(practice, /id="walkthrough"/);
+  assert.match(practice, /id="files"/);
   assert.match(evolution, /useState/);
   assert.match(evolution, /Project evolution stages/);
   assert.match(evolution, /Project evidence/);
@@ -85,6 +91,7 @@ test("keeps the launch experience interactive, accessible, responsive, and modul
   assert.match(fileExplorer, /useState/);
   assert.match(fileExplorer, /aria-live="polite"/);
   assert.match(fileExplorer, /illustrative example/);
+  assert.match(fileExplorer, /renewal-term/);
   assert.match(launch, /<table className="support-table">/);
   assert.match(launch, /support-panel/);
   assert.match(launch, /How does cancellation work now\?/);
@@ -94,6 +101,8 @@ test("keeps the launch experience interactive, accessible, responsive, and modul
   assert.match(launch, /Source Twin installation commands/);
   assert.match(evolutionCss, /\.evidence-board \{[^}]*grid-template-columns: repeat\(2/);
   assert.match(evolutionCss, /justify-content: flex-start/);
+  assert.match(evolutionCss, /\.practice-files/);
+  assert.doesNotMatch(launchCss, /\.uses-grid article:hover/);
   assert.match(responsiveCss, /@media \(max-width: 760px\)/);
   assert.match(responsiveCss, /\.evidence-board \{ grid-template-columns: 1fr; \}/);
   assert.match(responsiveCss, /prefers-reduced-motion: reduce/);
@@ -113,6 +122,7 @@ test("keeps the launch experience interactive, accessible, responsive, and modul
   }
 
   assert.ok(page.split("\n").length < 150, "the page composition should stay focused");
+  assert.ok(practice.split("\n").length < 100, "the practice chapter should stay focused");
   assert.ok(evolution.split("\n").length < 180, "the walkthrough should stay focused");
   assert.ok(fileExplorer.split("\n").length < 180, "the file explorer should stay focused");
   assert.ok(launch.split("\n").length < 150, "the launch overview should stay focused");

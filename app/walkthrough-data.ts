@@ -80,7 +80,7 @@ export const walkthroughStages: WalkthroughStage[] = [
     },
     counts: { twin: "2 changed", code: "0 changed", tests: "0 changed" },
     panels: {
-      twin: { filename: "source-twin/subscriptions/cancellation.md", label: "proposed next state", lines: [remove("An active subscription is cancelled immediately."), add("A customer cancelling an annual subscription stays active until renewal."), add("Its cancellation date is the existing renewal date."), add("Monthly customer and all administrator cancellations are immediate."), add("Non-active subscriptions remain unchanged.")] },
+      twin: { filename: "source-twin/subscriptions/*.md", label: "2 proposed files", lines: [plain("cancellation.md"), remove("An active subscription is cancelled immediately."), add("An annual customer stays active until renewal."), add("Monthly customer and administrator cancellation stays immediate."), plain("renewal.md"), add("Renewal completes a scheduled cancellation.")] },
       code: { filename: "src/subscriptions.js", label: "still current code", lines: [muted("No code changed yet. This is deliberate."), plain("return { ...subscription, status: 'cancelled' };"), muted("Git review makes this temporary mismatch visible.")] },
       tests: { filename: "planned behavior", label: "not implemented", lines: [add("annual customer schedules cancellation"), add("annual administrator cancels immediately"), add("scheduled cancellation resolves at renewal"), muted("These cases are intent until implementation is approved.")] },
       terminal: { filename: "repository terminal", label: "review warning", lines: [plain("$ npm exec --offline -- sourcetwin check --base HEAD"), add("Source Twin is valid."), plain("ST602 · twin-only logic change"), plain("Review the proposed behavior before implementation.")] },
@@ -103,17 +103,17 @@ export const walkthroughStages: WalkthroughStage[] = [
   },
   {
     id: "refine", label: "Refine + review", title: "A late production requirement stays traceable.",
-    summary: "The user required repeated annual cancellation to return the exact same object and never move the date. The agent changed prose, code, and one test, then reviewed remaining gaps.", state: "Final reviewed state",
+    summary: "The user required repeated annual cancellation to keep the original date and avoid duplicate work. The agent changed prose, code, and one test, then reviewed remaining gaps.", state: "Final reviewed state",
     conversation: {
-      human: "One more requirement. Repeating the same annual cancellation must change nothing, including the stored date.",
-      agent: "I updated the logic, added the guard and test, then reported the remaining date and billing gaps.",
+      human: "One more requirement. Repeating the same annual cancellation must not move its date or trigger the work twice.",
+      agent: "I updated the logic, added a guard and a test, then reported the remaining date and billing gaps.",
     },
     counts: { twin: "+1 case", code: "+1 guard", tests: "11 cases" },
     panels: {
       twin: { filename: "source-twin/subscriptions/cancellation.md", label: "final behavior", lines: [add("Repeating the same scheduled cancellation changes nothing."), add("It returns the existing subscription and keeps the original date."), plain(""), plain("## Test coverage"), add("- repeated annual cancellation is idempotent")] },
       code: { filename: "src/subscriptions.js", label: "final guard", lines: [add("if (subscription.cancelsAt === subscription.renewsAt) {"), add("  return subscription;"), add("}"), plain("return { ...subscription, cancelsAt: subscription.renewsAt };")] },
-      tests: { filename: "tests/subscriptions.test.js", label: "11 passing", lines: [add("+ repeated annual cancellation returns the same object"), plain("assert.strictEqual(result, subscription)"), plain("assert.equal(result.cancelsAt, originalRenewal)"), add("11 tests · all passing")] },
-      terminal: { filename: "repository terminal", label: "final review", lines: [plain("$ npm test"), add("tests 11 · pass 11 · fail 0"), plain("$ npm exec --offline -- sourcetwin check --base HEAD"), add("Source Twin is valid."), plain("$ npm exec --offline -- sourcetwin coverage"), add("Code entities 2 / 2 direct · Test entities 11 / 11 direct"), muted("Remaining gaps: invalid input, date edges, external billing effects.")] },
+      tests: { filename: "tests/subscriptions.test.js", label: "11 passing", lines: [add("+ repeated cancellation keeps the existing record"), plain("assert.strictEqual(result, subscription)"), plain("assert.equal(result.cancelsAt, originalRenewal)"), add("11 tests · all passing")] },
+      terminal: { filename: "repository terminal", label: "illustrative final review", lines: [plain("$ npm test"), add("tests 11 · pass 11 · fail 0"), plain("$ npm exec --offline -- sourcetwin check --base HEAD"), add("Source Twin is valid."), plain("$ npm exec --offline -- sourcetwin coverage"), add("Code entities 2 / 2 direct · Test entities 11 / 11 direct"), muted("Condensed results from this example repository."), muted("Remaining gaps: invalid input, date edges, external billing effects.")] },
     },
   },
 ];

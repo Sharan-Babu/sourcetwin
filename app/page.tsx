@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { EvolutionDemo } from "./components/evolution-demo";
 import { LaunchOverview } from "./components/launch-overview";
+import { PracticeOverview } from "./components/practice-overview";
 import { ProductOverview } from "./components/product-overview";
 import { heroExample } from "./hero-example";
 
@@ -66,7 +66,7 @@ export default function Home() {
         <article><strong>Reviewable</strong><span>Logic, code, and tests change together in Git.</span></article>
       </section>
 
-      <EvolutionDemo />
+      <PracticeOverview />
       <ProductOverview />
       <LaunchOverview />
 

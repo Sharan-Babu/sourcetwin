@@ -10,12 +10,15 @@
   .file-inspector { grid-column: 1 / -1; border-top: 1px solid var(--line); border-left: 0; }
   .file-inspector > p { min-height: 0; margin-bottom: 24px; }
   .uses-grid { grid-template-columns: repeat(2, 1fr); }
+  .uses-grid article { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .uses-grid article:nth-child(2n) { border-right: 0; }
+  .uses-grid article:nth-last-child(-n + 2) { border-bottom: 0; }
   .support-panel { grid-template-columns: 1fr; }
   .start-section { grid-template-columns: 1fr; gap: 42px; }
 }
 
 @media (max-width: 760px) {
-  .site-header, .hero, .foundation-strip, .section, .evolution-section, .start-section, footer { width: min(100% - 28px, 1420px); }
+  .site-header, .hero, .foundation-strip, .section, .practice-section, .start-section, footer { width: min(100% - 28px, 1420px); }
   .site-header { grid-template-columns: 1fr auto; }
   .site-nav { display: none; }
   .hero { min-height: 0; padding: 62px 0 75px; }
@@ -43,6 +46,8 @@
   .evidence-board { grid-template-columns: 1fr; }
   .evolution-evidence { min-height: 0; }
   .evidence-line { padding-right: 12px; }
+  .practice-files { grid-template-columns: 1fr; gap: 12px; padding-top: 26px; }
+  .practice-files > p { justify-self: start; }
   .command-grid { grid-template-columns: 1fr; }
   .command-grid article { min-height: 0; border-right: 0; border-bottom: 1px solid var(--line); }
   .command-grid article:last-child { border-bottom: 0; }
@@ -52,7 +57,9 @@
   .markdown-card pre { padding: 24px 18px; }
   .file-inspector { border-left: 0; }
   .uses-grid { grid-template-columns: 1fr; }
-  .uses-grid article { min-height: 0; }
+  .uses-grid article { min-height: 0; border-right: 0; border-bottom: 1px solid var(--line); }
+  .uses-grid article:nth-last-child(-n + 2) { border-bottom: 1px solid var(--line); }
+  .uses-grid article:last-child { border-bottom: 0; }
   .uses-grid article > div small { max-width: 180px; }
   .support-panel { padding: 24px 18px; }
   .support-table th, .support-table td { padding: 18px 16px; }

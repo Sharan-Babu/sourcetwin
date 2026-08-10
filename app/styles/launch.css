@@ -1,6 +1,6 @@
-.uses-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 8px; border: 1px solid #b9c8bd; border-radius: 12px; background: #dde8df; }
-.uses-grid article { min-height: 194px; padding: 23px; border: 1px solid #c8d2ca; border-radius: 0 0 8px 8px; background: var(--surface); box-shadow: inset 0 3px 0 #75a78e; transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
-.uses-grid article:hover { position: relative; z-index: 1; border-color: #91ae9d; box-shadow: inset 0 3px 0 var(--green), 0 10px 24px rgba(40,74,56,.09); transform: translateY(-3px); }
+.uses-grid { display: grid; grid-template-columns: repeat(4, 1fr); overflow: hidden; border: 1px solid #c3c9c4; border-radius: 0 0 10px 10px; background: var(--surface); }
+.uses-grid article { min-height: 194px; padding: 25px; border-right: 1px solid var(--line); background: transparent; }
+.uses-grid article:last-child { border-right: 0; }
 .uses-grid article > div { min-height: 35px; display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; }
 .uses-grid article > div span { color: var(--green); font-family: var(--font-geist-mono), monospace; font-size: 11px; font-weight: 700; }
 .uses-grid article > div small { max-width: 130px; color: #88908b; text-align: right; font-size: 10px; line-height: 1.35; text-transform: uppercase; }
