@@ -106,4 +106,4 @@ npm run quality
 - [Contributing](CONTRIBUTING.md)
 - [Security](SECURITY.md)
 - [Changelog](CHANGELOG.md)
-- [ISC license](LICENSE)
+- [Apache License 2.0](LICENSE)

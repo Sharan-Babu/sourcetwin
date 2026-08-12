@@ -15,3 +15,6 @@ Notable changes to Source Twin are recorded here.
 - Cross-platform CI, package smoke tests, and Source Twin's own repository mirror.
 - A local product website with a substantial interactive example.
 
+### Changed
+
+- The project license is Apache License 2.0.

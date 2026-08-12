@@ -101,11 +101,11 @@ describe("published package", () => {
 
     expect(manifest.bin?.sourcetwin).toBe("dist/cli.js");
     expect(manifest.engines?.node).toContain(">=22");
-    expect(manifest.license).toBe("ISC");
+    expect(manifest.license).toBe("Apache-2.0");
     await expect(readFile(join(installedRoot, "README.md"), "utf8"))
       .resolves.toContain("sourcetwin check --base main");
     await expect(readFile(join(installedRoot, "LICENSE"), "utf8"))
-      .resolves.toContain("ISC License");
+      .resolves.toContain("Apache License");
   });
 
   it("ships the complete initialized, structural, coverage, help, and review workflow", async () => {
