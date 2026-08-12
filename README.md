@@ -4,6 +4,8 @@ Source Twin keeps a plain-language mirror of a codebase inside the same Git repo
 
 The mirror is made of ordinary Markdown. It stays useful without a separate viewer, service, or agent platform.
 
+See the product and its interactive walkthrough at [sourcetwin.com](https://sourcetwin.com).
+
 ## What it looks like
 
 A Source Twin file explains one meaningful area of the product and points to a few useful places in the code and tests.

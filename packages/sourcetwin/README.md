@@ -4,6 +4,8 @@ Source Twin keeps a reviewable, plain-language mirror of a codebase inside the s
 
 It uses ordinary Markdown, YAML, Git, and three non-interactive commands. It does not require a viewer, MCP server, or a particular coding agent.
 
+See the product and its interactive walkthrough at [sourcetwin.com](https://sourcetwin.com).
+
 ## Requirements
 
 - Node.js 22.12 or newer

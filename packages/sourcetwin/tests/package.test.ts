@@ -95,13 +95,21 @@ describe("published package", () => {
     ) as {
       readonly bin?: { readonly sourcetwin?: string };
       readonly engines?: { readonly node?: string };
+      readonly homepage?: string;
       readonly license?: string;
+      readonly repository?: { readonly directory?: string; readonly url?: string };
     };
     const installedRoot = join(consumerRoot, "node_modules", "sourcetwin");
 
     expect(manifest.bin?.sourcetwin).toBe("dist/cli.js");
     expect(manifest.engines?.node).toContain(">=22");
+    expect(manifest.homepage).toBe("https://sourcetwin.com");
     expect(manifest.license).toBe("Apache-2.0");
+    expect(manifest.repository).toEqual({
+      directory: "packages/sourcetwin",
+      type: "git",
+      url: "git+https://github.com/Sharan-Babu/sourcetwin.git",
+    });
     await expect(readFile(join(installedRoot, "README.md"), "utf8"))
       .resolves.toContain("sourcetwin check --base main");
     await expect(readFile(join(installedRoot, "LICENSE"), "utf8"))

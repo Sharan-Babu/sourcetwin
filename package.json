@@ -2,6 +2,11 @@
   "name": "source-twin-website",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://sourcetwin.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sharan-Babu/sourcetwin.git"
+  },
   "workspaces": [
     "packages/*"
   ],

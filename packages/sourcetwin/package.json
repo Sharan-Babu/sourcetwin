@@ -2,6 +2,15 @@
   "name": "sourcetwin",
   "version": "0.1.0",
   "description": "A version-controlled, plain-language semantic twin of a codebase.",
+  "homepage": "https://sourcetwin.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sharan-Babu/sourcetwin.git",
+    "directory": "packages/sourcetwin"
+  },
+  "bugs": {
+    "url": "https://github.com/Sharan-Babu/sourcetwin/issues"
+  },
   "author": "Source Twin contributors",
   "license": "Apache-2.0",
   "keywords": [

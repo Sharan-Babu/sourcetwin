@@ -17,6 +17,8 @@ test("configures the website for Cloudflare Workers through OpenNext", async () 
   const wrangler = JSON.parse(wranglerText);
 
   assert.equal(packageJson.scripts.build, "next build");
+  assert.equal(packageJson.homepage, "https://sourcetwin.com");
+  assert.equal(packageJson.repository.url, "git+https://github.com/Sharan-Babu/sourcetwin.git");
   assert.match(packageJson.scripts.preview, /opennextjs-cloudflare build/);
   assert.match(packageJson.scripts.deploy, /opennextjs-cloudflare deploy/);
   assert.equal(typeof packageJson.dependencies["@opennextjs/cloudflare"], "string");

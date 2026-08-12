@@ -18,7 +18,7 @@ source:
 ---
 # Product boundaries
 
-Source Twin is a version-controlled, plain-language mirror of software behavior released under Apache License 2.0. The publishable CLI validates and measures that mirror. This repository also contains the product website with a simple Source Twin symbol, one substantial practice chapter that joins a feature journey to its representative files, compact command and language references, and concrete use cases. The root guide introduces the product with a concrete logic file, then links to concise contribution, security, change, and license information.
+Source Twin is a version-controlled, plain-language mirror of software behavior released under Apache License 2.0. The publishable CLI validates and measures that mirror. This repository also contains the product website at [sourcetwin.com](https://sourcetwin.com), with a simple Source Twin symbol, one substantial practice chapter that joins a feature journey to its representative files, compact command and language references, and concrete use cases. The root and package guides link to that walkthrough, introduce the product with a concrete logic file, and keep contribution, security, change, and license information concise.
 
 The website is part of this repository and product, while remaining separate from the CLI implementation. Its examples must distinguish verified current behavior from illustrative or historical evidence. The viewer, MCP, LSP, automatic generation, and other deferred capabilities remain outside the implemented product boundary.
 
