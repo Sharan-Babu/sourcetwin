@@ -18,6 +18,7 @@ npm run quality
 ```
 
 The quality command lints, type-checks, builds, and tests the website and CLI package.
+Use `npm run preview` when a website change also needs verification in the Cloudflare Workers runtime.
 
 ## Working agreements
 
@@ -31,4 +32,3 @@ The quality command lints, type-checks, builds, and tests the website and CLI pa
 ## Pull requests
 
 Describe the problem, the chosen behavior, and how you verified it. Call out remaining uncertainty or deliberate limitations. Keep the Source Twin, code, and tests reviewable together when they are related.
-

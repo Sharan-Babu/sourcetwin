@@ -100,6 +100,7 @@ npm run quality
 ```
 
 `npm run quality` lints, type-checks, builds, and tests the whole repository.
+`npm run preview` builds the website and runs it locally in the Cloudflare Workers runtime.
 
 ## Project information
 
