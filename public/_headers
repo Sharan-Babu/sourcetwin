@@ -1,2 +1,6 @@
 /_next/static/*
   Cache-Control: public,max-age=31536000,immutable
+/source-twin-walkthrough-poster.jpg
+  Cache-Control: public,max-age=31536000,immutable
+/source-twin-walkthrough-en.vtt
+  Cache-Control: public,max-age=31536000,immutable

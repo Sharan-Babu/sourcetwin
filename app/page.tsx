@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { LaunchOverview } from "./components/launch-overview";
 import { PracticeOverview } from "./components/practice-overview";
+import { ProductFilm } from "./components/product-film";
 import { ProductOverview } from "./components/product-overview";
 import { heroExample } from "./hero-example";
 
@@ -15,9 +16,9 @@ export default function Home() {
           <span>Source Twin</span>
         </a>
         <nav className="site-nav" aria-label="Page sections">
-          <a href="#walkthrough">Walkthrough</a>
+          <a href="#watch">Watch</a>
+          <a href="#walkthrough">Explore</a>
           <a href="#files">File format</a>
-          <a href="#uses">Use cases</a>
         </nav>
         <a className="header-action" href="#start">Get started</a>
       </header>
@@ -31,8 +32,8 @@ export default function Home() {
             coding agent use the same files to explain behavior, plan changes, and review what happened.
           </p>
           <div className="hero-actions">
-            <a className="button button--primary" href="#walkthrough">Walk through a real change <span>↓</span></a>
-            <a className="button button--quiet" href="#files">See the actual files</a>
+            <a className="button button--primary" href="#watch">Watch a real change <span>↓</span></a>
+            <a className="button button--quiet" href="#walkthrough">Explore it step by step</a>
           </div>
           <div className="hero-principles">
             <span>Plain Markdown</span><span>Lives in Git</span><span>Works with existing coding agents</span>
@@ -66,6 +67,7 @@ export default function Home() {
         <article><strong>Reviewable</strong><span>Logic, code, and tests change together in Git.</span></article>
       </section>
 
+      <ProductFilm />
       <PracticeOverview />
       <ProductOverview />
       <LaunchOverview />

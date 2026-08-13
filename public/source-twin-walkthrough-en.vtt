@@ -1,0 +1,127 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.000
+"Your software works, but can everyone see why?"
+
+00:00:05.000 --> 00:00:10.000
+The answer is spread across code, tests, tickets, and chat.
+
+00:00:10.000 --> 00:00:15.000
+Source Twin puts the logic in plain English inside the same project.
+
+00:00:15.000 --> 00:00:18.000
+Run the source twin init command.
+
+00:00:18.000 --> 00:00:20.000
+It creates the foundation.
+
+00:00:20.000 --> 00:00:23.000
+You and your coding agent choose what to describe.
+
+00:00:23.000 --> 00:00:26.000
+A logic file explains what the software does
+
+00:00:26.000 --> 00:00:30.000
+and links that explanation to useful code and tests.
+
+00:00:30.000 --> 00:00:35.000
+A term file gives an important product idea, one shared meaning.
+
+00:00:35.000 --> 00:00:37.000
+Here is the messaging app today.
+
+00:00:37.000 --> 00:00:40.000
+Maya sends, the launch has been cancelled.
+
+00:00:40.000 --> 00:00:45.000
+The message appears for everyone, notifications and a webhook start.
+
+00:00:45.000 --> 00:00:49.000
+Then she realizes it should have said rescheduled.
+
+00:00:49.000 --> 00:00:53.000
+So you ask the agent to give people 10 seconds to undo a message.
+
+00:00:53.000 --> 00:00:57.000
+Before touching code, the agent reads source twin.
+
+00:00:57.000 --> 00:01:00.000
+It finds that delivery is connected to notifications,
+
+00:01:00.000 --> 00:01:04.000
+webhooks, attachments, and scheduled messages.
+
+00:01:04.000 --> 00:01:07.000
+You agree that recipients should not see a pending message.
+
+00:01:07.000 --> 00:01:11.000
+Notifications and webhooks should wait.
+
+00:01:11.000 --> 00:01:14.000
+Undo should remove pending attachments.
+
+00:01:14.000 --> 00:01:18.000
+Scheduled messages should get the same window when they actually send.
+
+00:01:18.000 --> 00:01:21.000
+Seeing the whole change in English reveals a problem.
+
+00:01:21.000 --> 00:01:24.000
+Urgent admin safety alerts must not wait.
+
+00:01:24.000 --> 00:01:27.000
+The agent adds that exception.
+
+00:01:27.000 --> 00:01:29.000
+You approve the behavior.
+
+00:01:29.000 --> 00:01:34.000
+Now the agent follows the source twin links to the exact sending code and tests.
+
+00:01:34.000 --> 00:01:39.000
+The current function delivers the message and starts every side effect immediately.
+
+00:01:39.000 --> 00:01:44.000
+The implementation changes ordinary messages to a server side pending state.
+
+00:01:44.000 --> 00:01:47.000
+A durable job delivers them after 10 seconds.
+
+00:01:47.000 --> 00:01:53.000
+Undo works only while a message is pending, cancels that job, and cleans up attachments.
+
+00:01:53.000 --> 00:01:56.000
+Safety alerts still send immediately.
+
+00:01:56.000 --> 00:01:59.000
+Next, the agent adds readable tests.
+
+00:01:59.000 --> 00:02:04.000
+One proves that an undone message never reaches recipients, notifications, or webhooks.
+
+00:02:04.000 --> 00:02:08.000
+Another proves that urgent safety alerts do not wait.
+
+00:02:08.000 --> 00:02:11.000
+Now Maya sees a countdown and an undo button.
+
+00:02:11.000 --> 00:02:13.000
+She catches the mistake.
+
+00:02:13.000 --> 00:02:18.000
+Nothing leaves the system, and she can send the corrected message instead.
+
+00:02:18.000 --> 00:02:22.000
+Finally, source twin check validates the files and links.
+
+00:02:22.000 --> 00:02:24.000
+Coverage shows what is connected.
+
+00:02:24.000 --> 00:02:28.000
+Git shows the English, code, and tests together for review.
+
+00:02:28.000 --> 00:02:31.000
+So, that was source twin.
+
+00:02:31.000 --> 00:02:34.000
+Understand your software in plain English.

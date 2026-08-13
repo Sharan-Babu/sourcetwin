@@ -3,6 +3,7 @@ import { access, readFile } from "node:fs/promises";
 import test, { after, before } from "node:test";
 import { parse as parseYaml } from "yaml";
 import { heroExampleMarkdown } from "../app/hero-example.ts";
+import { productFilmUrl } from "../app/product-film-url.ts";
 import { walkthroughStages } from "../app/walkthrough-data.ts";
 import { logicFrontmatterSchema } from "../packages/sourcetwin/src/markdown/schema.ts";
 import { startWorkerPreview } from "./helpers/worker-preview.mjs";
@@ -35,6 +36,11 @@ test("server-renders the focused Source Twin launch website", async () => {
   assert.match(html, /subscription-service\/source-twin\//);
   assert.match(html, /Follow one change from idea to reviewed code\./);
   assert.match(html, /See Source Twin in practice/);
+  assert.match(html, /Watch Source Twin at work/);
+  assert.match(html, /From a mistaken message to reviewed code\./);
+  assert.match(html, /<video[^>]*aria-label="Source Twin product walkthrough"/);
+  assert.ok(html.includes(productFilmUrl));
+  assert.match(html, /source-twin-walkthrough-en\.vtt/);
   assert.match(html, /Problem identified/);
   assert.match(html, /Twin file/);
   assert.match(html, /src\/subscriptions\.js/);
@@ -58,11 +64,12 @@ test("server-renders the focused Source Twin launch website", async () => {
 
 test("keeps the launch experience interactive, accessible, responsive, and modular", async () => {
   const [
-    page, practice, evolution, walkthrough, fileExplorer, launch, product, responsiveCss,
-    baseCss, evolutionCss, launchCss, layout, siteUrl, robots, sitemap, packageJson,
+    page, practice, productFilm, evolution, walkthrough, fileExplorer, launch, product, responsiveCss,
+    baseCss, evolutionCss, filmCss, launchCss, layout, siteUrl, robots, sitemap, packageJson,
   ] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/components/practice-overview.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/components/product-film.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/components/evolution-demo.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/walkthrough-data.ts", import.meta.url), "utf8"),
     readFile(new URL("../app/components/file-explorer.tsx", import.meta.url), "utf8"),
@@ -71,6 +78,7 @@ test("keeps the launch experience interactive, accessible, responsive, and modul
     readFile(new URL("../app/styles/responsive.css", import.meta.url), "utf8"),
     readFile(new URL("../app/styles/base.css", import.meta.url), "utf8"),
     readFile(new URL("../app/styles/evolution.css", import.meta.url), "utf8"),
+    readFile(new URL("../app/styles/film.css", import.meta.url), "utf8"),
     readFile(new URL("../app/styles/launch.css", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/site-url.ts", import.meta.url), "utf8"),
@@ -81,6 +89,13 @@ test("keeps the launch experience interactive, accessible, responsive, and modul
 
   assert.match(evolution, /["']use client["']/);
   assert.match(practice, /<EvolutionDemo \/>/);
+  assert.match(page, /<ProductFilm \/>/);
+  assert.match(productFilm, /controls/);
+  assert.match(productFilm, /playsInline/);
+  assert.match(productFilm, /preload="metadata"/);
+  assert.match(productFilm, /kind="captions"/);
+  assert.match(productFilm, /default/);
+  assert.match(productFilm, /productFilmUrl/);
   assert.match(practice, /<FileExplorer \/>/);
   assert.match(practice, /id="walkthrough"/);
   assert.match(practice, /id="files"/);
@@ -106,6 +121,7 @@ test("keeps the launch experience interactive, accessible, responsive, and modul
   assert.match(evolutionCss, /\.evidence-board \{[^}]*grid-template-columns: repeat\(2/);
   assert.match(evolutionCss, /justify-content: flex-start/);
   assert.match(evolutionCss, /\.practice-files/);
+  assert.match(filmCss, /aspect-ratio: 16 \/ 9/);
   assert.doesNotMatch(launchCss, /\.uses-grid article:hover/);
   assert.match(responsiveCss, /@media \(max-width: 760px\)/);
   assert.match(responsiveCss, /\.evidence-board \{ grid-template-columns: 1fr; \}/);
@@ -127,6 +143,7 @@ test("keeps the launch experience interactive, accessible, responsive, and modul
 
   assert.ok(page.split("\n").length < 150, "the page composition should stay focused");
   assert.ok(practice.split("\n").length < 100, "the practice chapter should stay focused");
+  assert.ok(productFilm.split("\n").length < 80, "the product film should stay focused");
   assert.ok(evolution.split("\n").length < 180, "the walkthrough should stay focused");
   assert.ok(fileExplorer.split("\n").length < 180, "the file explorer should stay focused");
   assert.ok(launch.split("\n").length < 150, "the launch overview should stay focused");
@@ -151,12 +168,14 @@ test("keeps the displayed hero example and command evidence accurate", () => {
   }
 });
 
-test("ships a correctly sized social preview", async () => {
-  const [image, mark, icon, favicon] = await Promise.all([
+test("ships correctly prepared launch images and captions", async () => {
+  const [image, mark, icon, favicon, poster, captions] = await Promise.all([
     readFile(new URL("../public/og.png", import.meta.url)),
     readFile(new URL("../public/source-twin-mark.png", import.meta.url)),
     readFile(new URL("../app/icon.png", import.meta.url)),
     readFile(new URL("../app/favicon.ico", import.meta.url)),
+    readFile(new URL("../public/source-twin-walkthrough-poster.jpg", import.meta.url)),
+    readFile(new URL("../public/source-twin-walkthrough-en.vtt", import.meta.url), "utf8"),
   ]);
 
   assert.equal(image.subarray(1, 4).toString("ascii"), "PNG");
@@ -168,6 +187,11 @@ test("ships a correctly sized social preview", async () => {
   assert.equal(icon.readUInt32BE(16), 512);
   assert.equal(icon.readUInt32BE(20), 512);
   assert.equal(favicon.subarray(0, 4).toString("hex"), "00000100");
+  assert.equal(poster.subarray(0, 2).toString("hex"), "ffd8");
+  assert.match(captions, /^WEBVTT/);
+  assert.match(captions, /Nothing leaves the system/);
+  assert.match(productFilmUrl, /^https:\/\/media\.sourcetwin\.com\/videos\/.+\.mp4$/);
+  await assert.rejects(access(new URL("../public/source-twin-walkthrough.mp4", import.meta.url)));
 });
 
 test("serves robots and sitemap discovery routes", async () => {

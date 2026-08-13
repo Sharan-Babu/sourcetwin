@@ -18,7 +18,7 @@
 }
 
 @media (max-width: 760px) {
-  .site-header, .hero, .foundation-strip, .section, .practice-section, .start-section, footer { width: min(100% - 28px, 1420px); }
+  .site-header, .hero, .foundation-strip, .section, .film-section, .practice-section, .start-section, footer { width: min(100% - 28px, 1420px); }
   .site-header { grid-template-columns: 1fr auto; }
   .site-nav { display: none; }
   .hero { min-height: 0; padding: 62px 0 75px; }
@@ -37,6 +37,7 @@
   .section-heading--split { grid-template-columns: 1fr; gap: 10px; }
   .section-heading h2 { font-size: 40px; }
   .section-heading > p, .section-heading--split > p { font-size: 14px; }
+  .film-frame { border-radius: 8px; }
   .evolution-steps { grid-template-columns: repeat(2, 1fr); }
   .evolution-step:nth-child(3n) { border-right: 1px solid #c8cbc6; }
   .evolution-step:nth-child(2n) { border-right: 0; }

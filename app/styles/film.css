@@ -1,0 +1,17 @@
+.film-section { width: min(1420px, calc(100% - 48px)); }
+.film-heading { width: min(1200px, 100%); margin-inline: auto; }
+.film-heading h2 { max-width: 790px; }
+.film-frame {
+  overflow: hidden;
+  border: 1px solid #aeb4ae;
+  border-radius: 13px;
+  background: #102826;
+  box-shadow: 0 30px 80px rgba(31,42,37,.13);
+}
+.film-frame video {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 16 / 9;
+  background: #102826;
+}
