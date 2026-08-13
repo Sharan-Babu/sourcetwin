@@ -24,7 +24,12 @@ export async function createTestRepository(): Promise<TestRepository> {
   };
   return {
     root,
-    cleanup: () => rm(root, { force: true, recursive: true }),
+    cleanup: () => rm(root, {
+      force: true,
+      recursive: true,
+      maxRetries: 5,
+      retryDelay: 100,
+    }),
     git,
     commitAll: async (message = "test fixture") => {
       await git(["add", "--all"]);

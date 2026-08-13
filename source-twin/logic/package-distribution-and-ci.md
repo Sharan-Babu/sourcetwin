@@ -23,11 +23,11 @@ The CLI is one publishable npm workspace package for Node.js 22.12.0 or newer un
 
 Initialized repositories receive the same agent-neutral skill and version-matched offline help. The help makes clear that coverage entity lists contain kinds such as functions or tests, while source mappings contain file paths and locators. The skill directs agents to read local guidance, propose concepts before authoring, distinguish current behavior from proposals, and review Source Twin with code and tests.
 
-CI checks the package on Linux, macOS, and Windows. Repository quality also covers the product website, type checking, tests, linting, and dependency auditing. Package metadata, workflow YAML, and documentation are declarative evidence here; they are mapped as files rather than treated as function inventory.
+CI checks the package on Linux, macOS, and Windows. Cross-platform fixtures accept each operating system's normal line endings, allow slower package installation, and retry temporary-directory cleanup when Windows briefly retains a file handle. Repository quality also covers the product website, type checking, tests, linting, and dependency auditing. Package metadata, workflow YAML, and documentation are declarative evidence here; they are mapped as files rather than treated as function inventory.
 
 ## Test coverage
 
-- A packed package installs, exports, and runs the complete CLI workflow with enough setup time for slower CI package installation.
+- A packed package installs, exports, and runs the complete CLI workflow.
 - Help examples validate and measure against real temporary repositories.
 - The initialized skill and repository copy remain identical.
 - The CI matrix exercises package checks on three operating systems.

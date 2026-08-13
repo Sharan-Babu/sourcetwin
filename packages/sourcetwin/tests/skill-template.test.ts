@@ -10,6 +10,6 @@ describe("canonical agent skill", () => {
   it("keeps this repository on the exact skill shipped by init", async () => {
     const skill = await readFile(join(repositoryRoot, "source-twin", "SKILL.md"), "utf8");
 
-    expect(skill).toBe(DEFAULT_SKILL);
+    expect(skill.replaceAll("\r\n", "\n")).toBe(DEFAULT_SKILL);
   });
 });

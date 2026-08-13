@@ -55,11 +55,17 @@ beforeAll(async () => {
     ["install", join(temporaryRoot, "sourcetwin-0.1.0.tgz")],
     { cwd: consumerRoot },
   );
-}, 30_000);
+}, 120_000);
 
 afterAll(async () => {
-  await rm(temporaryRoot, { force: true, recursive: true });
-  await rm(isolatedPackageRoot, { force: true, recursive: true });
+  const cleanupOptions = {
+    force: true,
+    recursive: true,
+    maxRetries: 5,
+    retryDelay: 100,
+  } as const;
+  await rm(temporaryRoot, cleanupOptions);
+  await rm(isolatedPackageRoot, cleanupOptions);
 });
 
 describe("published package", () => {

@@ -24,7 +24,7 @@ afterEach(async () => {
 
 function fencedBlocks(markdown: string, language: string): readonly string[] {
   const fence = String.fromCharCode(96).repeat(3);
-  const expression = new RegExp(`${fence}${language}\\n([\\s\\S]*?)${fence}`, "g");
+  const expression = new RegExp(`${fence}${language}\\r?\\n([\\s\\S]*?)${fence}`, "g");
   return [...markdown.matchAll(expression)].flatMap((match) => (
     match[1] === undefined ? [] : [match[1]]
   ));
