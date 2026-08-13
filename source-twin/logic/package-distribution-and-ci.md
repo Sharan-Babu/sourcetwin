@@ -27,7 +27,7 @@ CI checks the package on Linux, macOS, and Windows. Repository quality also cove
 
 ## Test coverage
 
-- A packed package installs, exports, and runs the complete CLI workflow.
+- A packed package installs, exports, and runs the complete CLI workflow with enough setup time for slower CI package installation.
 - Help examples validate and measure against real temporary repositories.
 - The initialized skill and repository copy remain identical.
 - The CI matrix exercises package checks on three operating systems.

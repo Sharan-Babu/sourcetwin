@@ -55,7 +55,7 @@ beforeAll(async () => {
     ["install", join(temporaryRoot, "sourcetwin-0.1.0.tgz")],
     { cwd: consumerRoot },
   );
-});
+}, 30_000);
 
 afterAll(async () => {
   await rm(temporaryRoot, { force: true, recursive: true });
