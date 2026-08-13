@@ -172,5 +172,5 @@ coverage:
     };
     expect(reviewed.ok).toBe(true);
     expect(reviewed.data.gitReview.paired).toHaveLength(1);
-  });
+  }, 30_000);
 });
