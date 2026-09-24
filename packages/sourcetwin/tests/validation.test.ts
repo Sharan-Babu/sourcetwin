@@ -85,6 +85,22 @@ describe("project validation", () => {
     expect(result.diagnostics.filter(({ code }) => code === "ST207")).toHaveLength(4);
   });
 
+  it("does not approve invalid terms or keep malformed source mappings", async () => {
+    await repository.write(
+      "source-twin/terms/subscription.md",
+      "---\nid: Bad Term\n---\n# Subscription\n\nContinuing paid access.\n",
+    );
+    await repository.write(
+      "source-twin/logic/cancellation.md",
+      "---\nid: subscriptions.cancellation\nsource:\n  code: [src/*.ts]\n---\n# Cancellation\n\nA {{subscription}} can be cancelled.\n",
+    );
+
+    const result = await validateProject(repository.root);
+    expect(result.mappings).toEqual([]);
+    expect(result.diagnostics.map(({ code }) => code))
+      .toEqual(expect.arrayContaining(["ST205", "ST301", "ST208"]));
+  });
+
   it("reports unknown terms and broken inline or reference links", async () => {
     await writeValidDocuments();
     await repository.write(
@@ -102,7 +118,7 @@ describe("project validation", () => {
     await writeValidDocuments();
     await repository.write(
       "source-twin/drafts/links.md",
-      "# Links\n\n[Web](https://example.com) [Protocol](//example.com) [Root](/source-twin/README.md) [Here](#links)\n",
+      "# Links\n\n[Web](https://example.com) [Protocol](//example.com) [Root](/source-twin/README.md) [Here](#links) [Query](?view=details)\n",
     );
 
     const result = await validateProject(repository.root);

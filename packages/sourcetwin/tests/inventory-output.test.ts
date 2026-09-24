@@ -1,12 +1,14 @@
+import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { runAstGrep } from "../src/inventory/binary.js";
-import { AST_GREP_PROCESS_LIMIT, mapPathBatches } from "../src/inventory/batches.js";
+import { AST_GREP_PROCESS_LIMIT, mapPathBatches, pathBatches } from "../src/inventory/batches.js";
 import {
   duplicateDiagnostics,
   locatorFromMatch,
   outlineEntities,
   outlineOwnerForMatch,
   repositoryPath,
+  uniqueEntities,
   type AstGrepMatch,
 } from "../src/inventory/output.js";
 import { scanInventory } from "../src/inventory/scan.js";
@@ -73,6 +75,15 @@ describe("ast-grep output normalization", () => {
     expect(duplicateDiagnostics(entities)).toEqual([]);
   });
 
+  it("removes repeated parser records without merging distinct occurrences", () => {
+    const first = { path: "src/service.ts", kind: "function", locator: "run", line: 1 };
+    const second = { ...first, line: 2 };
+    const withOffset = { ...first, offset: 10 };
+
+    expect(uniqueEntities([first, first, second, withOffset, withOffset]))
+      .toEqual([first, second, withOffset]);
+  });
+
   it("finds the nearest structural owner for an AST match", () => {
     const selected: AstGrepMatch = {
       ...match({ NAME: "handler" }),
@@ -115,6 +126,16 @@ describe("ast-grep output normalization", () => {
     }
   });
 
+  it("gives a safe error when the native tool cannot start", async () => {
+    const repository = await createTestRepository();
+    try {
+      await expect(runAstGrep(join(repository.root, "missing-directory"), ["--version"]))
+        .rejects.toThrow("ast-grep failed to run.");
+    } finally {
+      await repository.cleanup();
+    }
+  });
+
   it("short-circuits when paths or entity kinds are empty", async () => {
     const repository = await createTestRepository();
     try {
@@ -125,6 +146,13 @@ describe("ast-grep output normalization", () => {
     } finally {
       await repository.cleanup();
     }
+  });
+
+  it("does not run a parser batch for an empty path scope", async () => {
+    expect(pathBatches([])).toEqual([]);
+    await expect(mapPathBatches([], async () => {
+      throw new Error("An empty scope must not start a parser.");
+    })).resolves.toEqual([]);
   });
 
   it("batches long path lists without changing inventory results", async () => {

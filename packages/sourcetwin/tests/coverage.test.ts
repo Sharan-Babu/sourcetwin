@@ -131,4 +131,28 @@ describe("path coverage", () => {
       entities: { direct: 0, unmapped: 1 },
     });
   });
+
+  it("does not mark a locator stale when the source could not be parsed", async () => {
+    const result = await analyzeScope(
+      repository.root,
+      { include: ["src/direct.ts"], exclude: [], entities: ["function"] },
+      [mapping({ kind: "direct", path: "src/direct.ts", locator: "direct" })],
+      [],
+      undefined,
+      {
+        id: "parse-error-test",
+        async scan() {
+          return {
+            entities: [],
+            unsupportedAreas: [{ path: "src/direct.ts", kind: "function", reason: "parse-error" }],
+            parseErrorPaths: ["src/direct.ts"],
+            diagnostics: [],
+          };
+        },
+      },
+    );
+
+    expect(result).toMatchObject({ direct: 1, broken: 0, unsupported: 1 });
+    expect(result.brokenReferences).toEqual([]);
+  });
 });

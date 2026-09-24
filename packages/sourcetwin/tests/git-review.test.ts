@@ -140,6 +140,17 @@ coverage:
     expect(result.data.gitReview?.twinOnly).toContain("source-twin/source-only.md");
   });
 
+  it("reports a supporting term moved outside Source Twin", async () => {
+    const base = await repository.commitAll("baseline");
+    await repository.git(["mv", "source-twin/terms/state.md", "state-archive.md"]);
+
+    const result = await runCheck(repository.root, { base });
+
+    expect(result.ok).toBe(true);
+    expect(result.data.gitReview?.supportingTwinChanges)
+      .toContain("source-twin/terms/state.md");
+  });
+
   it("reviews authored mappings even when they are outside measured coverage", async () => {
     await Promise.all([
       repository.write("scripts/deploy.ts", "before\n"),
