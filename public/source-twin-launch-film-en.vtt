@@ -1,0 +1,181 @@
+WEBVTT
+
+00:00:01.020 --> 00:00:02.730
+Coding agents can change your software
+
+00:00:02.750 --> 00:00:04.490
+faster than anyone can read it.
+
+00:00:05.440 --> 00:00:07.740
+The problem is understanding.
+
+00:00:07.760 --> 00:00:08.943
+What your software actually does
+
+00:00:08.963 --> 00:00:14.140
+is scattered across code, tests, tickets, and old chats.
+
+00:00:14.644 --> 00:00:16.794
+So changes get planned on guesses,
+
+00:00:16.814 --> 00:00:18.643
+and approved on faith.
+
+00:00:19.863 --> 00:00:20.899
+Source Twin solves this
+
+00:00:20.919 --> 00:00:23.493
+with a plain-English twin of your codebase.
+
+00:00:24.413 --> 00:00:25.563
+Here's an example:
+
+00:00:25.613 --> 00:00:28.523
+Paperlane, a small, made-up subscription app.
+
+00:00:29.113 --> 00:00:31.173
+Its twin is ordinary Markdown,
+
+00:00:31.193 --> 00:00:33.633
+in the same Git repository as its code.
+
+00:00:34.351 --> 00:00:36.458
+Each file explains one area of behavior
+
+00:00:36.478 --> 00:00:38.311
+in words anyone can read,
+
+00:00:38.331 --> 00:00:40.071
+and links it to the exact functions
+
+00:00:40.091 --> 00:00:42.002
+and tests behind it.
+
+00:00:42.862 --> 00:00:45.232
+Key ideas, like subscription and renewal,
+
+00:00:45.252 --> 00:00:47.744
+are defined once as shared terms,
+
+00:00:47.764 --> 00:00:50.781
+so people and agents mean the same thing everywhere.
+
+00:00:51.351 --> 00:00:52.661
+Now, a change.
+
+00:00:52.771 --> 00:00:54.755
+In Paperlane, cancelling an annual plan
+
+00:00:54.775 --> 00:00:56.659
+ends access right away,
+
+00:00:56.679 --> 00:00:59.141
+even though the customer paid for the whole year.
+
+00:01:00.431 --> 00:01:01.348
+You ask your coding agent
+
+00:01:01.368 --> 00:01:04.771
+to let annual customers keep access until renewal.
+
+00:01:04.989 --> 00:01:08.020
+Before touching code, the agent reads the twin,
+
+00:01:08.040 --> 00:01:10.349
+and follows a link to the renewal rule.
+
+00:01:11.039 --> 00:01:12.069
+There's a catch.
+
+00:01:12.399 --> 00:01:15.809
+At renewal, every active subscription is charged.
+
+00:01:15.829 --> 00:01:18.029
+Those customers would pay again.
+
+00:01:18.554 --> 00:01:20.084
+You decide, in plain English:
+
+00:01:20.254 --> 00:01:24.164
+a scheduled cancellation ends at renewal, with no charge.
+
+00:01:25.724 --> 00:01:27.824
+The agent updates the twin first.
+
+00:01:28.064 --> 00:01:31.111
+This short English diff is what your team agrees on,
+
+00:01:31.131 --> 00:01:32.944
+before any code changes.
+
+00:01:33.588 --> 00:01:34.345
+Then it follows the links
+
+00:01:34.365 --> 00:01:36.698
+to the exact code that has to change,
+
+00:01:36.718 --> 00:01:38.714
+and adds a test for each rule,
+
+00:01:38.734 --> 00:01:40.548
+including the catch it found.
+
+00:01:41.638 --> 00:01:44.608
+Now annual customers keep what they paid for.
+
+00:01:46.024 --> 00:01:47.414
+Source Twin check validates
+
+00:01:47.434 --> 00:01:49.794
+every file, term, and link,
+
+00:01:49.814 --> 00:01:50.914
+and shows that the English
+
+00:01:50.934 --> 00:01:52.944
+and the code changed together.
+
+00:01:53.738 --> 00:01:56.588
+Coverage shows what's connected, and what isn't.
+
+00:01:57.428 --> 00:01:59.818
+Then your team reviews the behavior, the code,
+
+00:01:59.838 --> 00:02:02.388
+and the tests together, in Git.
+
+00:02:02.958 --> 00:02:05.618
+Source Twin's checks prove the links are valid,
+
+00:02:05.638 --> 00:02:07.308
+not that the English is right.
+
+00:02:07.648 --> 00:02:09.228
+People still review the meaning.
+
+00:02:10.085 --> 00:02:11.454
+It's open source,
+
+00:02:11.555 --> 00:02:14.175
+and it works with the coding agent you already use.
+
+00:02:14.730 --> 00:02:17.503
+Install it, run init, and ask your agent
+
+00:02:17.523 --> 00:02:20.540
+to propose the first areas for you to approve.
+
+00:02:21.010 --> 00:02:22.480
+So, to sum up:
+
+00:02:22.550 --> 00:02:25.520
+Source Twin is a plain-English twin of your codebase.
+
+00:02:25.770 --> 00:02:27.040
+Written for people.
+
+00:02:27.310 --> 00:02:28.770
+Followed by agents.
+
+00:02:28.790 --> 00:02:30.080
+Reviewed in Git.

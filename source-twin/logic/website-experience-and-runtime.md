@@ -15,8 +15,8 @@ source:
     - app/product-film-url.ts
     - app/globals.css
     - app/styles/**
-    - public/source-twin-walkthrough-poster.jpg
-    - public/source-twin-walkthrough-en.vtt
+    - public/source-twin-launch-film-poster.jpg
+    - public/source-twin-launch-film-en.vtt
     - public/source-twin-mark.png
     - public/_headers
     - next.config.ts
@@ -29,7 +29,7 @@ source:
 ---
 # Website experience and runtime
 
-The product website server-renders one focused Source Twin launch page. A simple pair of mirrored code chevrons identifies Source Twin in the header, footer, browser icon, and favicon. An early product film follows an Undo Send feature from a mistaken message through behavior agreement, a discovered safety-alert exception, implementation, tests, and review. It uses a responsive native player with a prepared poster, English captions, and no automatic playback. The versioned film is served from the Source Twin Cloudflare R2 media domain instead of being stored in Git. A public environment setting can replace that media URL when needed. One continuous practice chapter then lets readers inspect a substantial subscription change and open the resulting Source Twin folder from the same example project. The page also explains the three-command loop, shows practical use cases and compact language support, and ends with installation guidance. Public copy stays natural, concise, and free of the punctuation patterns rejected by the product writing guidance.
+The product website server-renders one focused Source Twin launch page. A simple pair of mirrored code chevrons identifies Source Twin in the header, footer, browser icon, and favicon. The product film uses a fictional subscription app to show a cancellation change from behavior agreement through a billing implication, implementation, tests, and review. It uses a responsive native player with a prepared poster, English captions, and no automatic playback. A clean web encode is served from the Source Twin Cloudflare R2 media domain instead of being stored in Git. A public environment setting can replace that versioned media URL when needed. One continuous practice chapter then lets readers inspect a substantial subscription change and open the resulting Source Twin folder from the same example project. The page also explains the three-command loop, shows practical use cases and compact language support, and ends with installation guidance. Public copy stays natural, concise, and free of the punctuation patterns rejected by the product writing guidance.
 
 Two client interactions let readers move through the feature journey and inspect its representative Source Twin files. Each walkthrough stage includes a condensed human and agent exchange from a tested coding-agent scenario. Its evidence board keeps the twin file, code, tests, and terminal result visible together, using two columns on larger screens and one readable column on small screens. The final folder includes the approved cancellation, subscription, and renewal terms described by the journey. The command loop uses one compact terminal-like surface. The everyday workflow uses one neutral, connected row with four concise steps and no decorative hover movement. Language support fits in one contained panel. The file explorer announces changed content to assistive technology, and the language support section uses real table headings and row headings. Subtle load and stage-change motion supports orientation without blocking use, and reduced-motion preferences disable it. The layout adapts at smaller widths without horizontal overflow.
 

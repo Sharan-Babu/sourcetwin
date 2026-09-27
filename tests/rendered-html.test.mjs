@@ -37,10 +37,10 @@ test("server-renders the focused Source Twin launch website", async () => {
   assert.match(html, /Follow one change from idea to reviewed code\./);
   assert.match(html, /See Source Twin in practice/);
   assert.match(html, /Watch Source Twin at work/);
-  assert.match(html, /From a mistaken message to reviewed code\./);
+  assert.match(html, /From a cancellation question to reviewed code\./);
   assert.match(html, /<video[^>]*aria-label="Source Twin product walkthrough"/);
   assert.ok(html.includes(productFilmUrl));
-  assert.match(html, /source-twin-walkthrough-en\.vtt/);
+  assert.match(html, /source-twin-launch-film-en\.vtt/);
   assert.match(html, /Problem identified/);
   assert.match(html, /Twin file/);
   assert.match(html, /src\/subscriptions\.js/);
@@ -174,8 +174,8 @@ test("ships correctly prepared launch images and captions", async () => {
     readFile(new URL("../public/source-twin-mark.png", import.meta.url)),
     readFile(new URL("../app/icon.png", import.meta.url)),
     readFile(new URL("../app/favicon.ico", import.meta.url)),
-    readFile(new URL("../public/source-twin-walkthrough-poster.jpg", import.meta.url)),
-    readFile(new URL("../public/source-twin-walkthrough-en.vtt", import.meta.url), "utf8"),
+    readFile(new URL("../public/source-twin-launch-film-poster.jpg", import.meta.url)),
+    readFile(new URL("../public/source-twin-launch-film-en.vtt", import.meta.url), "utf8"),
   ]);
 
   assert.equal(image.subarray(1, 4).toString("ascii"), "PNG");
@@ -189,7 +189,7 @@ test("ships correctly prepared launch images and captions", async () => {
   assert.equal(favicon.subarray(0, 4).toString("hex"), "00000100");
   assert.equal(poster.subarray(0, 2).toString("hex"), "ffd8");
   assert.match(captions, /^WEBVTT/);
-  assert.match(captions, /Nothing leaves the system/);
+  assert.match(captions, /Paperlane, a small, made-up subscription app/);
   assert.match(productFilmUrl, /^https:\/\/media\.sourcetwin\.com\/videos\/.+\.mp4$/);
   await assert.rejects(access(new URL("../public/source-twin-walkthrough.mp4", import.meta.url)));
 });

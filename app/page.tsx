@@ -32,7 +32,7 @@ export default function Home() {
             coding agent use the same files to explain behavior, plan changes, and review what happened.
           </p>
           <div className="hero-actions">
-            <a className="button button--primary" href="#watch">Watch a real change <span>↓</span></a>
+            <a className="button button--primary" href="#watch">Watch a feature change <span>↓</span></a>
             <a className="button button--quiet" href="#walkthrough">Explore it step by step</a>
           </div>
           <div className="hero-principles">

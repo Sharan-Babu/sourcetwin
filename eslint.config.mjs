@@ -14,6 +14,7 @@ const eslintConfig = defineConfig([
     "dist/**",
     "**/dist/**",
     "**/coverage/**",
+    "launch/video/**",
     "next-env.d.ts",
   ]),
 ]);
